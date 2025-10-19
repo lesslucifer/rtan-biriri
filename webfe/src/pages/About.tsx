@@ -1,30 +1,30 @@
 import { Button, Container, Title, Text, Card, List, ThemeIcon } from '@mantine/core';
 import { Link } from 'react-router-dom';
-import { IconSkull } from '@tabler/icons-react';
+import { IconSpy } from '@tabler/icons-react';
 
 function About() {
   return (
-    <Container size="lg" className="py-6 md:py-12 shinigami-presence">
+    <Container size="lg" className="py-6 md:py-12 spy-family-presence">
       <div className="text-center mb-8 md:mb-12">
         <Title
           order={1}
-          className="death-note-text mb-4 md:mb-6 flicker text-3xl md:text-5xl"
+          className="spy-family-text mb-4 md:mb-6 twinkle text-3xl md:text-5xl"
           style={{ letterSpacing: '2px md:tracking-[3px]' }}
         >
-          THE SHINIGAMI REALM
+          THE FORGER FAMILY
         </Title>
-        <Text size="lg" c="shinigami" className="mb-6 md:mb-8 shinigami-text text-lg md:text-xl">
-          "The gods of death have existed since the beginning of time, observing the human world with detached curiosity."
+        <Text size="lg" c="anya" className="mb-6 md:mb-8 anya-text text-lg md:text-xl">
+          "A fake family formed for a real mission... but maybe they're becoming a real family after all."
         </Text>
       </div>
 
-      <Card shadow="xl" padding="xl" className="death-note-card mb-8 ominous-glow">
-        <Text size="lg" className="mb-6 shinigami-text" style={{ lineHeight: 1.8 }} >
-          The Death Note is a supernatural notebook that grants its user the ability to kill anyone by writing their name while picturing their face.
-          This dark power comes with strict rules and consequences that bind both the human user and the Shinigami who owns the note.
+      <Card shadow="xl" padding="xl" className="spy-family-card mb-8 spy-glow">
+        <Text size="lg" className="mb-6 anya-text" style={{ lineHeight: 1.8 }} >
+          Operation Strix requires master spy Twilight to create the perfect fake family to infiltrate Eden Academy.
+          What starts as a mission becomes something more as this unlikely trio discovers the true meaning of family bonds.
         </Text>
-        <Text size="lg" className="mb-8 death-note-text" fw={600} c="blood" >
-          The Rules of the Death Note:
+        <Text size="lg" className="mb-8 spy-family-text" fw={600} c="loid" >
+          Mission Objectives:
         </Text>
 
         <List
@@ -32,33 +32,33 @@ function About() {
           size="lg"
           center
           icon={
-            <ThemeIcon color="blood" size={24} radius={0}>
-              <IconSkull size={16} />
+            <ThemeIcon color="loid" size={24} radius={12}>
+              <IconSpy size={16} />
             </ThemeIcon>
           }
         >
           <List.Item>
-            <Text fw={600} c="blood">The Name Rule</Text> -
-            <Text span c="dimmed" className="shinigami-text">The human whose name is written in this note shall die</Text>
+            <Text fw={600} c="loid">Operation Strix</Text> -
+            <Text span c="dimmed" className="anya-text">Prevent war between Westalis and Ostania through peaceful means</Text>
           </List.Item>
           <List.Item>
-            <Text fw={600} c="blood">The Face Rule</Text> -
-            <Text span c="dimmed" className="shinigami-text">The writer must have the person's face in their mind</Text>
+            <Text fw={600} c="anya">Family Formation</Text> -
+            <Text span c="dimmed" className="anya-text">Create the perfect fake family to infiltrate elite society</Text>
           </List.Item>
           <List.Item>
-            <Text fw={600} c="blood">The Time Rule</Text> -
-            <Text span c="dimmed" className="shinigami-text">The death will occur 40 seconds after the name is written</Text>
+            <Text fw={600} c="yor">Eden Academy</Text> -
+            <Text span c="dimmed" className="anya-text">Get close to target Donovan Desmond through his son Damian</Text>
           </List.Item>
           <List.Item>
-            <Text fw={600} c="blood">The Ownership Rule</Text> -
-            <Text span c="dimmed" className="shinigami-text">The human who touches the Death Note can see the Shinigami</Text>
+            <Text fw={600} c="bond">World Peace</Text> -
+            <Text span c="dimmed" className="anya-text">Maintain peace between nations through intelligence and diplomacy</Text>
           </List.Item>
         </List>
       </Card>
 
-      <div className="rule-of-death-note mb-8">
-        <Text size="lg" c="dimmed" className="shinigami-text">
-          "The person in possession of the Death Note is possessed by a god of death, its original owner, until they die."
+      <div className="mission-briefing mb-8">
+        <Text size="lg" c="dimmed" className="anya-text">
+          "Sometimes the best missions are the ones where you discover something unexpected... like love, family, and belonging."
         </Text>
       </div>
 
@@ -67,29 +67,29 @@ function About() {
           component={Link}
           to="/"
           size="md"
-          color="blood"
+          color="loid"
           variant="filled"
-          className="text-sm md:text-base px-4 py-2 md:px-6 md:py-3 ominous-glow"
+          className="text-sm md:text-base px-4 py-2 md:px-6 md:py-3 spy-glow"
           style={{
-            boxShadow: '0 4px 16px rgba(139, 0, 0, 0.3)',
+            boxShadow: '0 4px 16px rgba(77, 171, 255, 0.3)',
             letterSpacing: '1px'
           }}
         >
-          RETURN TO RULES
+          BACK TO MISSION
         </Button>
         <Button
           component={Link}
           to="/contact"
           size="md"
-          color="shinigami"
+          color="anya"
           variant="filled"
-          className="text-sm md:text-base px-4 py-2 md:px-6 md:py-3 ominous-glow"
+          className="text-sm md:text-base px-4 py-2 md:px-6 md:py-3 spy-glow"
           style={{
-            boxShadow: '0 4px 16px rgba(47, 47, 47, 0.3)',
+            boxShadow: '0 4px 16px rgba(184, 134, 255, 0.3)',
             letterSpacing: '1px'
           }}
         >
-          CONTACT RYUK
+          CONTACT WISE
         </Button>
       </div>
     </Container>

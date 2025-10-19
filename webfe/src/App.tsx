@@ -5,82 +5,94 @@ import About from './pages/About'
 import Contact from './pages/Contact'
 import './App.css'
 
-const deathNoteTheme = createTheme({
+const spyFamilyTheme = createTheme({
   colors: {
-    deathNote: [
-      '#0a0a0a',
-      '#1a1a1a',
-      '#2a2a2a',
-      '#3a3a3a',
-      '#4a4a4a',
-      '#5a5a5a',
-      '#6a6a6a',
-      '#7a7a7a',
-      '#8a8a8a',
-      '#9a9a9a'
+    twilight: [
+      '#FFF8F0',
+      '#FFEEDD',
+      '#FFE4CC',
+      '#FFD9B3',
+      '#FFCE99',
+      '#FFC380',
+      '#FFB866',
+      '#FFAD4D',
+      '#FFA233',
+      '#FF971A'
     ],
-    blood: [
-      '#8B0000',
-      '#A00000',
-      '#B50000',
-      '#CA0000',
-      '#DC143C',
-      '#FF0000',
-      '#FF3333',
-      '#FF6666',
-      '#FF9999',
-      '#FFCCCC'
+    anya: [
+      '#F0E6FF',
+      '#E6D6FF',
+      '#DDC6FF',
+      '#D4B6FF',
+      '#CAA6FF',
+      '#C196FF',
+      '#B886FF',
+      '#AF76FF',
+      '#A566FF',
+      '#9C56FF'
     ],
-    shinigami: [
-      '#2F2F2F',
-      '#404040',
-      '#515151',
-      '#626262',
-      '#737373',
-      '#848484',
-      '#959595',
-      '#A6A6A6',
-      '#B7B7B7',
-      '#C8C8C8'
+    loid: [
+      '#E6F3FF',
+      '#CCE7FF',
+      '#B3DBFF',
+      '#99CFFF',
+      '#80C3FF',
+      '#66B7FF',
+      '#4DABFF',
+      '#339FFF',
+      '#1A93FF',
+      '#0087FF'
     ],
-    parchment: [
-      '#F5F5DC',
-      '#F0F0D6',
-      '#EBEBD0',
-      '#E6E6CA',
-      '#E1E1C4',
-      '#DCDCBE',
-      '#D7D7B8',
-      '#D2D2B2',
-      '#CDCDAC',
-      '#C8C8A6'
+    yor: [
+      '#FFE6F0',
+      '#FFCCE0',
+      '#FFB3D1',
+      '#FF99C2',
+      '#FF80B3',
+      '#FF66A3',
+      '#FF4D94',
+      '#FF3385',
+      '#FF1A75',
+      '#FF0066'
     ],
-    ink: [
-      '#000000',
-      '#1A1A1A',
-      '#333333',
-      '#4D4D4D',
-      '#666666',
-      '#808080',
-      '#999999',
-      '#B3B3B3',
-      '#CCCCCC',
-      '#E6E6E6'
+    bond: [
+      '#FFF0E6',
+      '#FFE0CC',
+      '#FFD1B3',
+      '#FFC199',
+      '#FFB280',
+      '#FFA266',
+      '#FF934D',
+      '#FF8333',
+      '#FF741A',
+      '#FF6400'
+    ],
+    spy: [
+      '#2C3E50',
+      '#34495E',
+      '#3E4C5E',
+      '#48596E',
+      '#52667E',
+      '#5C738E',
+      '#66809E',
+      '#708DAE',
+      '#7A9ABE',
+      '#84A7CE'
     ]
   },
-  primaryColor: 'blood',
-  primaryShade: { light: 0, dark: 0 },
-  fontFamily: 'Crimson Text, serif',
+  primaryColor: 'loid',
+  primaryShade: { light: 6, dark: 4 },
+  fontFamily: 'Nunito, sans-serif',
   headings: {
-    fontFamily: 'Cinzel, serif',
+    fontFamily: 'Poppins, sans-serif',
     fontWeight: '600'
   },
   radius: {
-    xs: '0px',
-    sm: '0px',
-    md: '0px',
-    lg: '0px',
-    xl: '0px'
+    xs: '8px',
+    sm: '12px',
+    md: '16px',
+    lg: '20px',
+    xl: '24px'
   },
   spacing: {
     xs: '4px',
@@ -93,21 +105,22 @@ const deathNoteTheme = createTheme({
     Button: {
       styles: () => ({
         root: {
-          borderRadius: 0,
-          border: '2px solid #8B0000',
-          background: 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)',
-          color: '#e0e0e0',
-          fontFamily: 'Cinzel, serif',
-          textTransform: 'uppercase',
-          letterSpacing: '2px',
+          borderRadius: '16px',
+          border: '2px solid transparent',
+          background: 'linear-gradient(135deg, #4DABFF 0%, #66B7FF 100%)',
+          color: '#FFFFFF',
+          fontFamily: 'Poppins, sans-serif',
+          fontWeight: '600',
+          letterSpacing: '0.5px',
           position: 'relative',
           overflow: 'hidden',
           transition: 'all 0.3s ease',
+          boxShadow: '0 4px 16px rgba(77, 171, 255, 0.3)',
           '&:hover': {
-            background: 'linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%)',
-            borderColor: '#DC143C',
-            boxShadow: '0 0 20px rgba(139, 0, 0, 0.5)',
-            transform: 'translateY(-1px)'
+            background: 'linear-gradient(135deg, #66B7FF 0%, #80C3FF 100%)',
+            borderColor: '#B3DBFF',
+            boxShadow: '0 8px 24px rgba(77, 171, 255, 0.4)',
+            transform: 'translateY(-2px) scale(1.02)'
           },
           '&::before': {
             content: '""',
@@ -116,8 +129,8 @@ const deathNoteTheme = createTheme({
             left: '-100%',
             width: '100%',
             height: '100%',
-            background: 'linear-gradient(90deg, transparent, rgba(139, 0, 0, 0.2), transparent)',
-            transition: 'left 0.5s'
+            background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)',
+            transition: 'left 0.6s'
           },
           '&:hover::before': {
             left: '100%'
@@ -128,17 +141,17 @@ const deathNoteTheme = createTheme({
     Card: {
       styles: () => ({
         root: {
-          borderRadius: 0,
-          background: 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)',
-          border: '2px solid #3a3a3a',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.8)',
+          borderRadius: '20px',
+          background: 'linear-gradient(135deg, #FFFFFF 0%, #FFF8F0 100%)',
+          border: '2px solid #FFEEDD',
+          boxShadow: '0 8px 32px rgba(255, 174, 221, 0.2)',
           transition: 'all 0.3s ease',
           position: 'relative',
           overflow: 'hidden',
           '&:hover': {
-            borderColor: '#8B0000',
-            boxShadow: '0 12px 40px rgba(139, 0, 0, 0.3)',
-            transform: 'translateY(-2px)'
+            borderColor: '#FFC380',
+            boxShadow: '0 12px 40px rgba(255, 174, 221, 0.3)',
+            transform: 'translateY(-4px) scale(1.01)'
           },
           '&::before': {
             content: '""',
@@ -147,7 +160,7 @@ const deathNoteTheme = createTheme({
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'linear-gradient(45deg, transparent 30%, rgba(139, 0, 0, 0.1) 50%, transparent 70%)',
+            background: 'linear-gradient(45deg, transparent 30%, rgba(255, 195, 128, 0.1) 50%, transparent 70%)',
             opacity: 0,
             transition: 'opacity 0.3s ease'
           },
@@ -162,31 +175,31 @@ const deathNoteTheme = createTheme({
 
 function App() {
   return (
-    <MantineProvider theme={deathNoteTheme}>
+    <MantineProvider theme={spyFamilyTheme}>
       <BrowserRouter>
         <AppShell
           padding={{ base: 'sm', md: 'md' }}
           header={{ height: { base: 60, md: 80 } }}
           style={{
             header: {
-              background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%)',
-              borderBottom: '2px solid #8B0000',
-              boxShadow: '0 4px 20px rgba(139, 0, 0, 0.3)'
+              background: 'linear-gradient(135deg, #E6F3FF 0%, #CCE7FF 100%)',
+              borderBottom: '2px solid #FFEEDD',
+              boxShadow: '0 4px 20px rgba(255, 174, 221, 0.2)'
             }
           }}
         >
-          <div className="flex items-center justify-between h-full px-4 md:px-6 shinigami-presence">
+          <div className="flex items-center justify-between h-full px-4 md:px-6 spy-family-presence">
             <Text
               size="xl"
               fw={700}
-              c="blood"
-              className="death-note-text flicker text-base md:text-xl"
+              c="spy"
+              className="spy-family-text twinkle text-base md:text-xl"
               style={{
-                textShadow: '2px 2px 4px rgba(139, 0, 0, 0.8)',
+                textShadow: '2px 2px 4px rgba(44, 62, 80, 0.3)',
                 letterSpacing: '1px md:tracking-[3px]'
               }}
             >
-              DEATH NOTE
+              SPY × FAMILY
             </Text>
             <div className="flex gap-1 md:gap-2">
               <Button
@@ -194,7 +207,7 @@ function App() {
                 to="/"
                 variant="filled"
                 size="compact-xs"
-                color="blood"
+                color="loid"
                 className="text-xs md:text-sm px-2 py-1 md:px-3 md:py-2"
                 style={{
                   fontWeight: 600,
@@ -202,14 +215,14 @@ function App() {
                   minWidth: 'fit-content'
                 }}
               >
-                RULES
+                MISSION
               </Button>
               <Button
                 component={Link}
                 to="/about"
                 variant="filled"
                 size="compact-xs"
-                color="shinigami"
+                color="anya"
                 className="text-xs md:text-sm px-2 py-1 md:px-3 md:py-2"
                 style={{
                   fontWeight: 600,
@@ -217,14 +230,14 @@ function App() {
                   minWidth: 'fit-content'
                 }}
               >
-                MORE
+                FAMILY
               </Button>
               <Button
                 component={Link}
                 to="/contact"
                 variant="filled"
                 size="compact-xs"
-                color="ink"
+                color="yor"
                 className="text-xs md:text-sm px-2 py-1 md:px-3 md:py-2"
                 style={{
                   fontWeight: 600,
@@ -236,7 +249,7 @@ function App() {
               </Button>
             </div>
           </div>
-          <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+          <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />

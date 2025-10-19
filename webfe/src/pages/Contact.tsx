@@ -20,41 +20,41 @@ function Contact() {
   };
 
   return (
-    <Container size="lg" className="py-6 md:py-12 shinigami-presence">
+    <Container size="lg" className="py-6 md:py-12 spy-family-presence">
       <div className="text-center mb-8 md:mb-12">
         <Title
           order={1}
-          className="death-note-text mb-4 md:mb-6 flicker text-3xl md:text-5xl"
+          className="spy-family-text mb-4 md:mb-6 twinkle text-3xl md:text-5xl"
           style={{ letterSpacing: '2px md:tracking-[3px]' }}
         >
-          CONTACT THE SHINIGAMI
+          CONTACT WISE AGENCY
         </Title>
-        <Text size="lg" c="shinigami" className="mb-6 md:mb-8 shinigami-text text-lg md:text-xl">
-          "To communicate with the gods of death, one must possess the Death Note."
+        <Text size="lg" c="anya" className="mb-6 md:mb-8 anya-text text-lg md:text-xl">
+          "For confidential communications regarding Operation Strix and world peace initiatives."
         </Text>
       </div>
 
-      <Card shadow="xl" padding="xl" className="death-note-card ominous-glow mb-8">
+      <Card shadow="xl" padding="xl" className="spy-family-card spy-glow mb-8">
         <form onSubmit={handleSubmit}>
           <Stack gap="lg">
             <TextInput
-              label="Your Name (Write it carefully...)"
-              placeholder="The name you were given at birth"
+              label="Your Name (For agent identification)"
+              placeholder="Enter your full name"
               value={formData.name}
               onChange={(e) => handleChange('name', e.currentTarget.value)}
               required
               size="lg"
               style={{
-                '--input-radius': '0px',
-                '--input-bd': '2px solid #8B0000',
-                '--input-bd-focus': '2px solid #DC143C',
-                '--input-bg': 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)',
-                '--input-color': '#e0e0e0'
+                '--input-radius': '16px',
+                '--input-bd': '2px solid #FFEEDD',
+                '--input-bd-focus': '2px solid #FFC380',
+                '--input-bg': 'linear-gradient(135deg, #FFFFFF 0%, #FFF8F0 100%)',
+                '--input-color': '#2C3E50'
               }}
-              className="shinigami-text"
+              className="anya-text"
             />
             <TextInput
-              label="Your Connection to the Human World"
+              label="Your Communication Channel"
               placeholder="your@email.com"
               type="email"
               value={formData.email}
@@ -62,51 +62,51 @@ function Contact() {
               required
               size="lg"
               style={{
-                '--input-radius': '0px',
-                '--input-bd': '2px solid #8B0000',
-                '--input-bd-focus': '2px solid #DC143C',
-                '--input-bg': 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)',
-                '--input-color': '#e0e0e0'
+                '--input-radius': '16px',
+                '--input-bd': '2px solid #FFEEDD',
+                '--input-bd-focus': '2px solid #FFC380',
+                '--input-bg': 'linear-gradient(135deg, #FFFFFF 0%, #FFF8F0 100%)',
+                '--input-color': '#2C3E50'
               }}
-              className="shinigami-text"
+              className="anya-text"
             />
             <Textarea
-              label="Your Message to the Shinigami Realm"
-              placeholder="What would you ask the gods of death?"
+              label="Your Message to WISE"
+              placeholder="Share your intelligence or request assistance..."
               value={formData.message}
               onChange={(e) => handleChange('message', e.currentTarget.value)}
               rows={6}
               required
               size="lg"
               style={{
-                '--input-radius': '0px',
-                '--input-bd': '2px solid #8B0000',
-                '--input-bd-focus': '2px solid #DC143C',
-                '--input-bg': 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)',
-                '--input-color': '#e0e0e0'
+                '--input-radius': '16px',
+                '--input-bd': '2px solid #FFEEDD',
+                '--input-bd-focus': '2px solid #FFC380',
+                '--input-bg': 'linear-gradient(135deg, #FFFFFF 0%, #FFF8F0 100%)',
+                '--input-color': '#2C3E50'
               }}
-              className="shinigami-text"
+              className="anya-text"
             />
             <Button
               type="submit"
               size="md"
-              color="blood"
+              color="loid"
               variant="filled"
-              className="text-sm md:text-base px-4 py-2 md:px-6 md:py-3 ominous-glow"
+              className="text-sm md:text-base px-4 py-2 md:px-6 md:py-3 spy-glow"
               style={{
-                boxShadow: '0 4px 16px rgba(139, 0, 0, 0.3)',
+                boxShadow: '0 4px 16px rgba(77, 171, 255, 0.3)',
                 letterSpacing: '1px'
               }}
             >
-              SEND MESSAGE TO RYUK
+              TRANSMIT TO AGENCY
             </Button>
           </Stack>
         </form>
       </Card>
 
-      <div className="rule-of-death-note mb-8">
-        <Text size="lg" c="dimmed" className="shinigami-text">
-          "The human who touches the Death Note can recognize the image and voice of the Shinigami who owns it."
+      <div className="mission-briefing mb-8">
+        <Text size="lg" c="dimmed" className="anya-text">
+          "All communications are encrypted and handled with the utmost discretion. For the sake of world peace."
         </Text>
       </div>
 
@@ -115,25 +115,25 @@ function Contact() {
           component={Link}
           to="/"
           size="md"
-          color="blood"
+          color="loid"
           variant="filled"
-          className="text-sm md:text-base px-4 py-2 md:px-6 md:py-3 ominous-glow"
+          className="text-sm md:text-base px-4 py-2 md:px-6 md:py-3 spy-glow"
           style={{
-            boxShadow: '0 4px 16px rgba(139, 0, 0, 0.3)',
+            boxShadow: '0 4px 16px rgba(77, 171, 255, 0.3)',
             letterSpacing: '1px'
           }}
         >
-          RETURN TO RULES
+          BACK TO MISSION
         </Button>
         <Button
           component={Link}
           to="/about"
           size="md"
-          color="shinigami"
+          color="yor"
           variant="filled"
-          className="text-sm md:text-base px-4 py-2 md:px-6 md:py-3 ominous-glow"
+          className="text-sm md:text-base px-4 py-2 md:px-6 md:py-3 spy-glow"
           style={{
-            boxShadow: '0 4px 16px rgba(47, 47, 47, 0.3)',
+            boxShadow: '0 4px 16px rgba(255, 100, 0, 0.3)',
             letterSpacing: '1px'
           }}
         >
