@@ -109,4 +109,12 @@ export class FirebaseService {
   }
 }
 
-export const createFirebaseService = (collectionName: string) => new FirebaseService(collectionName);
+const FBServices = new Map<string, FirebaseService>()
+
+export const createFirebaseService = (collectionName: string): FirebaseService => {
+  if (!FBServices.has(collectionName)) {
+    FBServices.set(collectionName, new FirebaseService(collectionName));
+  }
+
+  return FBServices.get(collectionName)!;
+};

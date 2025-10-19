@@ -1,19 +1,45 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-:root {
-  font-family: 'Nunito', sans-serif, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.6;
-  font-weight: 400;
+@layer base {
+  :root {
+    --background: 30 40% 98%;
+    --foreground: 210 40% 18%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 40% 18%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 40% 18%;
+    --primary: 210 100% 65%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 100% 95%;
+    --secondary-foreground: 210 40% 18%;
+    --muted: 30 40% 96%;
+    --muted-foreground: 210 20% 40%;
+    --accent: 30 100% 90%;
+    --accent-foreground: 210 40% 18%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 30 40% 88%;
+    --input: 30 40% 88%;
+    --ring: 210 100% 65%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
 
-  color-scheme: light;
-  color: #2C3E50;
-  background-color: #FFF8F0;
+    font-family: 'Nunito', sans-serif, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    font-weight: 400;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    color-scheme: light;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 
 * {
@@ -51,168 +77,4 @@ body {
 @keyframes mission-slide {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
-}
-
-.twinkle {
-  animation: twinkle 3s ease-in-out infinite;
-}
-
-.family-bounce {
-  animation: family-bounce 2s ease-in-out infinite;
-}
-
-.spy-glow {
-  animation: spy-glow 4s ease-in-out infinite;
-}
-
-/* Spy x Family button styles */
-.spy-family-button {
-  border-radius: 16px;
-  border: 2px solid transparent;
-  background: linear-gradient(135deg, #4DABFF 0%, #66B7FF 100%);
-  color: #FFFFFF;
-  padding: 12px 24px;
-  font-size: 1em;
-  font-weight: 600;
-  font-family: 'Poppins', sans-serif;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  letter-spacing: 0.5px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 16px rgba(77, 171, 255, 0.3);
-}
-
-.spy-family-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.6s;
-}
-
-.spy-family-button:hover::before {
-  left: 100%;
-}
-
-.spy-family-button:hover {
-  background: linear-gradient(135deg, #66B7FF 0%, #80C3FF 100%);
-  border-color: #B3DBFF;
-  box-shadow: 0 8px 24px rgba(77, 171, 255, 0.4);
-  transform: translateY(-2px) scale(1.02);
-}
-
-.spy-family-button:active {
-  transform: translateY(0) scale(1);
-  box-shadow: 0 4px 16px rgba(77, 171, 255, 0.3);
-}
-
-/* Spy x Family text styles */
-.spy-family-text {
-  font-family: 'Poppins', sans-serif;
-  color: #2C3E50;
-  text-shadow: 2px 2px 4px rgba(44, 62, 80, 0.1);
-  letter-spacing: 0.5px;
-}
-
-.anya-text {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 500;
-  color: #B886FF;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-/* Spy x Family card styles */
-.spy-family-card {
-  border-radius: 20px;
-  background: linear-gradient(135deg, #FFFFFF 0%, #FFF8F0 100%);
-  border: 2px solid #FFEEDD;
-  box-shadow: 0 8px 32px rgba(255, 174, 221, 0.2);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.spy-family-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, transparent 30%, rgba(255, 195, 128, 0.1) 50%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.spy-family-card:hover::before {
-  opacity: 1;
-}
-
-.spy-family-card:hover {
-  border-color: #FFC380;
-  box-shadow: 0 12px 40px rgba(255, 174, 221, 0.3);
-  transform: translateY(-4px) scale(1.01);
-}
-
-/* Mission briefing */
-.mission-briefing {
-  border-left: 4px solid #4DABFF;
-  padding-left: 16px;
-  margin: 16px 0;
-  font-style: italic;
-  color: #5C738E;
-  position: relative;
-}
-
-.mission-briefing::before {
-  content: '📋';
-  position: absolute;
-  left: -8px;
-  top: -4px;
-  font-size: 1.2em;
-}
-
-/* Spy family presence */
-.spy-family-presence {
-  position: relative;
-}
-
-.spy-family-presence::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at 80% 20%, rgba(255, 195, 128, 0.1) 0%, transparent 50%);
-  pointer-events: none;
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-  .spy-family-text {
-    font-size: 1.5rem !important;
-  }
-
-  .anya-text {
-    font-size: 1rem !important;
-  }
-
-  .spy-family-button {
-    padding: 8px 16px !important;
-    font-size: 0.875rem !important;
-  }
-
-  .spy-family-card {
-    padding: 1rem !important;
-  }
-
-  .mission-briefing {
-    padding-left: 12px !important;
-    margin: 12px 0 !important;
-  }
 }

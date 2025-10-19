@@ -1,98 +1,109 @@
-import { Button, Container, Title, Text, Card, List, ThemeIcon } from '@mantine/core';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
-import { IconSpy } from '@tabler/icons-react';
+import { Shield } from 'lucide-react';
 
 function About() {
   return (
-    <Container size="lg" className="py-6 md:py-12 spy-family-presence">
+    <div className="container mx-auto max-w-4xl py-6 md:py-12 spy-family-presence">
       <div className="text-center mb-8 md:mb-12">
-        <Title
-          order={1}
-          className="spy-family-text mb-4 md:mb-6 twinkle text-3xl md:text-5xl"
-          style={{ letterSpacing: '2px md:tracking-[3px]' }}
+        <h1
+          className="spy-family-text mb-4 md:mb-6 twinkle text-3xl md:text-5xl font-bold"
+          style={{ letterSpacing: '2px' }}
         >
           THE FORGER FAMILY
-        </Title>
-        <Text size="lg" c="anya" className="mb-6 md:mb-8 anya-text text-lg md:text-xl">
+        </h1>
+        <p className="text-lg md:text-xl mb-6 md:mb-8 anya-text text-[hsl(var(--primary))]">
           "A fake family formed for a real mission... but maybe they're becoming a real family after all."
-        </Text>
+        </p>
       </div>
 
-      <Card shadow="xl" padding="xl" className="spy-family-card mb-8 spy-glow">
-        <Text size="lg" className="mb-6 anya-text" style={{ lineHeight: 1.8 }} >
-          Operation Strix requires master spy Twilight to create the perfect fake family to infiltrate Eden Academy.
-          What starts as a mission becomes something more as this unlikely trio discovers the true meaning of family bonds.
-        </Text>
-        <Text size="lg" className="mb-8 spy-family-text" fw={600} c="loid" >
-          Mission Objectives:
-        </Text>
+      <Card className="spy-family-card mb-8 spy-glow shadow-xl">
+        <CardContent className="p-6">
+          <p className="text-lg mb-6 anya-text leading-relaxed">
+            Operation Strix requires master spy Twilight to create the perfect fake family to infiltrate Eden Academy.
+            What starts as a mission becomes something more as this unlikely trio discovers the true meaning of family bonds.
+          </p>
+          <p className="text-lg mb-8 spy-family-text font-semibold text-[hsl(210_100%_65%)]">
+            Mission Objectives:
+          </p>
 
-        <List
-          spacing="md"
-          size="lg"
-          center
-          icon={
-            <ThemeIcon color="loid" size={24} radius={12}>
-              <IconSpy size={16} />
-            </ThemeIcon>
-          }
-        >
-          <List.Item>
-            <Text fw={600} c="loid">Operation Strix</Text> -
-            <Text span c="dimmed" className="anya-text">Prevent war between Westalis and Ostania through peaceful means</Text>
-          </List.Item>
-          <List.Item>
-            <Text fw={600} c="anya">Family Formation</Text> -
-            <Text span c="dimmed" className="anya-text">Create the perfect fake family to infiltrate elite society</Text>
-          </List.Item>
-          <List.Item>
-            <Text fw={600} c="yor">Eden Academy</Text> -
-            <Text span c="dimmed" className="anya-text">Get close to target Donovan Desmond through his son Damian</Text>
-          </List.Item>
-          <List.Item>
-            <Text fw={600} c="bond">World Peace</Text> -
-            <Text span c="dimmed" className="anya-text">Maintain peace between nations through intelligence and diplomacy</Text>
-          </List.Item>
-        </List>
+          <ul className="space-y-4 text-lg">
+            <li className="flex items-start gap-3">
+              <div className="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-[hsl(210_100%_65%)] flex items-center justify-center">
+                <Shield className="w-4 h-4 text-white" />
+              </div>
+              <div>
+                <span className="font-semibold text-[hsl(210_100%_65%)]">Operation Strix</span>
+                {' - '}
+                <span className="text-muted-foreground anya-text">Prevent war between Westalis and Ostania through peaceful means</span>
+              </div>
+            </li>
+            <li className="flex items-start gap-3">
+              <div className="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-[hsl(var(--primary))] flex items-center justify-center">
+                <Shield className="w-4 h-4 text-white" />
+              </div>
+              <div>
+                <span className="font-semibold text-[hsl(var(--primary))]">Family Formation</span>
+                {' - '}
+                <span className="text-muted-foreground anya-text">Create the perfect fake family to infiltrate elite society</span>
+              </div>
+            </li>
+            <li className="flex items-start gap-3">
+              <div className="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-[hsl(0_84%_60%)] flex items-center justify-center">
+                <Shield className="w-4 h-4 text-white" />
+              </div>
+              <div>
+                <span className="font-semibold text-[hsl(0_84%_60%)]">Eden Academy</span>
+                {' - '}
+                <span className="text-muted-foreground anya-text">Get close to target Donovan Desmond through his son Damian</span>
+              </div>
+            </li>
+            <li className="flex items-start gap-3">
+              <div className="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-[hsl(30_100%_50%)] flex items-center justify-center">
+                <Shield className="w-4 h-4 text-white" />
+              </div>
+              <div>
+                <span className="font-semibold text-[hsl(30_100%_50%)]">World Peace</span>
+                {' - '}
+                <span className="text-muted-foreground anya-text">Maintain peace between nations through intelligence and diplomacy</span>
+              </div>
+            </li>
+          </ul>
+        </CardContent>
       </Card>
 
-      <div className="mission-briefing mb-8">
-        <Text size="lg" c="dimmed" className="anya-text">
+      <div className="mission-briefing mb-8 text-center">
+        <p className="text-lg text-muted-foreground anya-text">
           "Sometimes the best missions are the ones where you discover something unexpected... like love, family, and belonging."
-        </Text>
+        </p>
       </div>
 
       <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-6">
         <Button
-          component={Link}
-          to="/"
-          size="md"
-          color="loid"
-          variant="filled"
-          className="text-sm md:text-base px-4 py-2 md:px-6 md:py-3 spy-glow"
+          asChild
+          size="lg"
+          className="spy-glow text-sm md:text-base"
           style={{
             boxShadow: '0 4px 16px rgba(77, 171, 255, 0.3)',
             letterSpacing: '1px'
           }}
         >
-          BACK TO MISSION
+          <Link to="/">BACK TO MISSION</Link>
         </Button>
         <Button
-          component={Link}
-          to="/contact"
-          size="md"
-          color="anya"
-          variant="filled"
-          className="text-sm md:text-base px-4 py-2 md:px-6 md:py-3 spy-glow"
+          asChild
+          size="lg"
+          className="spy-glow text-sm md:text-base"
           style={{
             boxShadow: '0 4px 16px rgba(184, 134, 255, 0.3)',
             letterSpacing: '1px'
           }}
         >
-          CONTACT WISE
+          <Link to="/contact">CONTACT WISE</Link>
         </Button>
       </div>
-    </Container>
+    </div>
   );
 }
 

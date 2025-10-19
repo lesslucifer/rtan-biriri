@@ -1,103 +1,94 @@
-import { Button, Container, Title, Text, Card, Group } from '@mantine/core';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 
 function Home() {
   return (
-    <Container size="xl" className="py-6 md:py-12 spy-family-presence">
+    <div className="container mx-auto max-w-7xl py-6 md:py-12 spy-family-presence">
       <div className="text-center mb-8 md:mb-12">
-        <Title
-          order={1}
-          className="spy-family-text mb-3 md:mb-4 twinkle text-3xl md:text-6xl"
+        <h1
+          className="spy-family-text mb-3 md:mb-4 twinkle text-3xl md:text-6xl font-bold"
           style={{
-            letterSpacing: '2px md:tracking-[4px]'
+            letterSpacing: '2px'
           }}
         >
           OPERATION STRIX
-        </Title>
-        <Text
-          size="lg"
-          c="anya"
-          className="mb-6 md:mb-8 anya-text text-lg md:text-xl"
-        >
+        </h1>
+        <p className="text-lg md:text-xl mb-6 md:mb-8 anya-text text-[hsl(var(--primary))]">
           "For world peace! 🌟" - Anya Forger
-        </Text>
+        </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-12">
-        <Card shadow="lg" padding="xl" className="spy-family-card spy-glow">
-          <div className="text-center">
+        <Card className="spy-family-card spy-glow shadow-lg">
+          <CardContent className="p-6 text-center">
             <div className="text-4xl mb-4 family-bounce">🕵️‍♂️</div>
-            <Title order={3} c="loid" className="mb-3 spy-family-text">
+            <h3 className="text-xl font-semibold mb-3 spy-family-text text-[hsl(210_100%_65%)]">
               Twilight
-            </Title>
-            <Text c="dimmed" className="anya-text">
+            </h3>
+            <p className="text-muted-foreground anya-text">
               Master spy codenamed Twilight. Poses as psychiatrist Loid Forger to complete Operation Strix.
-            </Text>
-          </div>
+            </p>
+          </CardContent>
         </Card>
 
-        <Card shadow="lg" padding="xl" className="spy-family-card spy-glow">
-          <div className="text-center">
+        <Card className="spy-family-card spy-glow shadow-lg">
+          <CardContent className="p-6 text-center">
             <div className="text-4xl mb-4 family-bounce">👧</div>
-            <Title order={3} c="anya" className="mb-3 spy-family-text">
+            <h3 className="text-xl font-semibold mb-3 spy-family-text text-[hsl(var(--primary))]">
               Anya
-            </Title>
-            <Text c="dimmed" className="anya-text">
+            </h3>
+            <p className="text-muted-foreground anya-text">
               Telepathic child who can read minds. Adopted by Loid to help with his mission.
-            </Text>
-          </div>
+            </p>
+          </CardContent>
         </Card>
 
-        <Card shadow="lg" padding="xl" className="spy-family-card spy-glow">
-          <div className="text-center">
+        <Card className="spy-family-card spy-glow shadow-lg">
+          <CardContent className="p-6 text-center">
             <div className="text-4xl mb-4 family-bounce">🌸</div>
-            <Title order={3} c="yor" className="mb-3 spy-family-text">
+            <h3 className="text-xl font-semibold mb-3 spy-family-text text-[hsl(0_84%_60%)]">
               Yor
-            </Title>
-            <Text c="dimmed" className="anya-text">
+            </h3>
+            <p className="text-muted-foreground anya-text">
               Assassin codenamed Thorn Princess. Marries Loid to maintain her cover and complete their fake family.
-            </Text>
-          </div>
+            </p>
+          </CardContent>
         </Card>
       </div>
 
-      <div className="mission-briefing mb-8">
-        <Text size="lg" c="dimmed" className="anya-text">
+      <div className="mission-briefing mb-8 text-center">
+        <p className="text-lg text-muted-foreground anya-text">
           "Mission Objective: Create the perfect fake family to infiltrate Eden Academy and prevent war between Westalis and Ostania."
-        </Text>
+        </p>
       </div>
 
-      <Group justify="center" gap="md" className="flex-col sm:flex-row">
+      <div className="flex justify-center gap-4 flex-col sm:flex-row items-center">
         <Button
-          component={Link}
-          to="/about"
-          size="md"
-          color="loid"
-          variant="filled"
-          className="text-sm md:text-base px-4 py-2 md:px-6 md:py-3 spy-glow"
+          asChild
+          size="lg"
+          className="spy-glow text-sm md:text-base"
           style={{
             boxShadow: '0 4px 16px rgba(77, 171, 255, 0.3)',
             letterSpacing: '1px'
           }}
         >
-          MEET THE FAMILY
+          <Link to="/about">MEET THE FAMILY</Link>
         </Button>
         <Button
-          component={Link}
-          to="/contact"
-          size="md"
-          color="bond"
-          variant="filled"
-          className="text-sm md:text-base px-4 py-2 md:px-6 md:py-3 spy-glow"
+          asChild
+          size="lg"
+          variant="secondary"
+          className="spy-glow text-sm md:text-base"
           style={{
             boxShadow: '0 4px 16px rgba(255, 100, 0, 0.3)',
             letterSpacing: '1px'
           }}
         >
-          CONTACT WISE
+          <Link to="/contact">CONTACT WISE</Link>
         </Button>
-      </Group>
-    </Container>
+      </div>
+    </div>
   );
 }
 

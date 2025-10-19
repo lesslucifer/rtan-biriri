@@ -1,88 +1,151 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useEffect, useMemo } from 'react';
 import { createFirebaseService } from '../services/firebaseService';
-import type { DocumentData, QueryConstraint } from 'firebase/firestore';
+import { onSnapshot, collection, query, QueryConstraint } from 'firebase/firestore';
+import { db } from '../config/firebase';
+import type { DocumentData } from 'firebase/firestore';
 
-interface UseFirebaseOptions {
+export interface UseFirebaseRealtimeOptions {
   collectionName: string;
   constraints?: QueryConstraint[];
+  enabled?: boolean;
   realTime?: boolean;
 }
 
-interface UseFirebaseReturn<T extends DocumentData> {
+export interface UseFirebaseRealtimeReturn<T extends DocumentData> {
   data: T[];
-  loading: boolean;
-  error: string | null;
+  isLoading: boolean;
+  isError: boolean;
+  error: Error | null;
   create: (data: Omit<T, 'id'>) => Promise<string>;
   update: (id: string, data: Partial<T>) => Promise<void>;
   delete: (id: string) => Promise<void>;
-  refresh: () => Promise<void>;
+  refetch: () => void;
 }
 
 export function useFirebase<T extends DocumentData = DocumentData>({
   collectionName,
-  constraints = []
-}: UseFirebaseOptions): UseFirebaseReturn<T> {
-  const [data, setData] = useState<T[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
+  constraints = [],
+  enabled = true,
+}: UseFirebaseRealtimeOptions): UseFirebaseRealtimeReturn<T> {
+  const queryClient = useQueryClient();
   const service = createFirebaseService(collectionName);
 
-  const fetchData = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const result = await service.getAll(constraints);
-      setData(result as T[]);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
-    } finally {
-      setLoading(false);
-    }
-  }, [service, constraints]);
+  const queryKey = useMemo(() =>
+    ['firebase', collectionName, JSON.stringify(constraints)],
+    [collectionName, constraints]
+  );
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    if (!enabled) return;
 
-  const create = async (newData: Omit<T, 'id'>): Promise<string> => {
-    try {
-      const id = await service.create(newData);
-      await fetchData();
-      return id;
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to create document');
-      throw err;
+    const q = constraints.length > 0
+      ? query(collection(db, collectionName), ...constraints)
+      : collection(db, collectionName);
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+        // console.log("NEW SNAP_SHOT", snapshot)
+        // if (!snapshot.metadata.fromCache) {
+        //   const data = snapshot.docs.map(doc => ({
+        //     id: doc.id,
+        //     ...doc.data()
+        //   } as unknown as T));
+  
+        // }
+        const data = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        } as unknown as T));
+        console.log("NEW_SNAPSHOT", data)
+        queryClient.setQueryData(queryKey, data);
+      },
+      (error) => {
+        console.error('Realtime listener error:', error);
+        // queryClient.setQueryData(queryKey, []);
+      }
+    );
+
+    return () => unsubscribe();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [collectionName]);
+
+  const { data, isLoading, isError, error, refetch } = useQuery<T[]>({
+    queryKey,
+    queryFn: async () => {
+      const result = await service.getAll(constraints);
+      return result as T[];
+    },
+    enabled: enabled,
+    staleTime: Infinity,
+    initialData: [],
+    retry: 3,
+  });
+
+  const createMutation = useMutation<string, Error, Omit<T, 'id'>>({
+    mutationFn: async (newData) => {
+      return await service.create(newData);
+    },
+    onMutate: async (newData) => {
+      await queryClient.cancelQueries({ queryKey });
+      const previousData = queryClient.getQueryData<T[]>(queryKey);
+
+      queryClient.setQueryData<T[]>(queryKey, (old) => [
+        ...(old || []),
+        { ...newData, id: 'temp-id' } as unknown as T,
+      ]);
+
+      return { previousData };
+    },
+    //@ts-expect-error: The context shouldn't be unknown
+    onError: (_err, _newData, context: { previousData?: T[] }) => {
+      if (context?.previousData) {
+        queryClient.setQueryData(queryKey, context.previousData);
+      }
     }
-  };
+  });
 
-  const update = async (id: string, updatedData: Partial<T>): Promise<void> => {
-    try {
-      await service.update(id, updatedData);
-      await fetchData();
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to update document');
-      throw err;
+  const updateMutation = useMutation<void, Error, { id: string; data: Partial<T> }>({
+    mutationFn: async ({ id, data }) => {
+      await service.update(id, data);
+    },
+    onMutate: async ({ id, data }) => {
+      await queryClient.cancelQueries({ queryKey });
+      const previousData = queryClient.getQueryData<T[]>(queryKey);
+
+      queryClient.setQueryData<T[]>(queryKey, (old) =>
+        (old || []).map((item) =>
+          (item as { id?: string }).id === id ? { ...item, ...data } : item
+        )
+      );
+
+      return { previousData };
     }
-  };
+  });
 
-  const deleteDoc = async (id: string): Promise<void> => {
-    try {
+  const deleteMutation = useMutation<void, Error, string>({
+    mutationFn: async (id) => {
       await service.delete(id);
-      await fetchData();
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to delete document');
-      throw err;
+    },
+    onMutate: async (id) => {
+      await queryClient.cancelQueries({ queryKey });
+      const previousData = queryClient.getQueryData<T[]>(queryKey);
+
+      queryClient.setQueryData<T[]>(queryKey, (old) =>
+        (old || []).filter((item) => (item as { id?: string }).id !== id)
+      );
+
+      return { previousData };
     }
-  };
+  });
 
   return {
     data,
-    loading,
+    isLoading,
+    isError,
     error,
-    create,
-    update,
-    delete: deleteDoc,
-    refresh: fetchData
+    create: createMutation.mutateAsync,
+    update: (id: string, data: Partial<T>) => updateMutation.mutateAsync({ id, data }),
+    delete: deleteMutation.mutateAsync,
+    refetch,
   };
 }
