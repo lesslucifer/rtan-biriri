@@ -62,8 +62,9 @@ src/
 - Mantine UI library is the primary component library - use Mantine components for consistent UI
 - Package manager is pnpm (use `pnpm` commands, not `npm`)
 - **Do not generate comments while generating code unless super needed**
-- **Always try to run `pnpm tsc` and `pnpm lint` to check the code and fix issues that occur after completing the task to make sure we have done the work completely and properly**
+- **Always try to run `pnpm typecheck` and `pnpm lint` to check the code and fix issues that occur after completing the task to make sure we have done the work completely and properly**
 - Never runs `pnpm dev` script for checking as it open a service and won't stop so it take a long time to run
+- Always focus on and make sure the layout displays well on Phone device screens. It's our target screens.
 
 ### Mantine UI Usage
 - Import components from `@mantine/core` and hooks from `@mantine/hooks`

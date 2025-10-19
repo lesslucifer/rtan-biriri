@@ -3,90 +3,98 @@ import { Link } from 'react-router-dom';
 
 function Home() {
   return (
-    <Container size="xl" className="py-12">
-      <div className="text-center mb-12">
+    <Container size="xl" className="py-6 md:py-12 shinigami-presence">
+      <div className="text-center mb-8 md:mb-12">
         <Title
           order={1}
-          className="gradient-text mb-4 float"
-          style={{ fontSize: '3.5rem' }}
+          className="death-note-text mb-3 md:mb-4 flicker text-3xl md:text-6xl"
+          style={{
+            letterSpacing: '2px md:tracking-[4px]'
+          }}
         >
-          🌸 Welcome to Kawaii World! 🌸
+          THE RULES OF THE DEATH NOTE
         </Title>
-        <Text size="xl" c="dimmed" className="mb-8" style={{ fontSize: '1.3rem' }} >
-          Dive into a colorful universe full of joy and cuteness! ✨
+        <Text
+          size="lg"
+          c="shinigami"
+          className="mb-6 md:mb-8 shinigami-text text-lg md:text-xl"
+        >
+          "The human whose name is written in this note shall die."
         </Text>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-        <Card shadow="lg" padding="xl" radius="lg" className="cute-card sparkle">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-12">
+        <Card shadow="lg" padding="xl" className="death-note-card ominous-glow">
           <div className="text-center">
-            <div className="text-4xl mb-4">🌈</div>
-            <Title order={3} c="pink" className="mb-3">
-              Colorful Design
+            <div className="text-4xl mb-4 flicker">⚰️</div>
+            <Title order={3} c="blood" className="mb-3 death-note-text">
+              Rule I
             </Title>
-            <Text c="dimmed">
-              Experience a vibrant world with pastel colors and cute gradients that make every interaction delightful!
+            <Text c="dimmed" className="shinigami-text">
+              The human whose name is written in this note shall die. This note will not take effect unless the writer has the person's face in their mind.
             </Text>
           </div>
         </Card>
 
-        <Card shadow="lg" padding="xl" radius="lg" className="cute-card sparkle">
+        <Card shadow="lg" padding="xl" className="death-note-card ominous-glow">
           <div className="text-center">
-            <div className="text-4xl mb-4">🎨</div>
-            <Title order={3} c="purple" className="mb-3">
-              Creative UI
+            <div className="text-4xl mb-4 flicker">📜</div>
+            <Title order={3} c="blood" className="mb-3 death-note-text">
+              Rule II
             </Title>
-            <Text c="dimmed">
-              Beautiful components with smooth animations and playful interactions that spark joy!
+            <Text c="dimmed" className="shinigami-text">
+              This note shall become the property of the human world, once it touches the ground of (arrives in) the human world.
             </Text>
           </div>
         </Card>
 
-        <Card shadow="lg" padding="xl" radius="lg" className="cute-card sparkle">
+        <Card shadow="lg" padding="xl" className="death-note-card ominous-glow">
           <div className="text-center">
-            <div className="text-4xl mb-4">💫</div>
-            <Title order={3} c="mint" className="mb-3">
-              Magic Experience
+            <div className="text-4xl mb-4 flicker">💀</div>
+            <Title order={3} c="blood" className="mb-3 death-note-text">
+              Rule III
             </Title>
-            <Text c="dimmed">
-              Every click, hover, and interaction is designed to feel magical and bring a smile to your face!
+            <Text c="dimmed" className="shinigami-text">
+              The owner of the note can recognize the image and voice of the original owner, a god of death.
             </Text>
           </div>
         </Card>
       </div>
 
-      <Group justify="center" gap="lg">
+      <div className="rule-of-death-note mb-8">
+        <Text size="lg" c="dimmed" className="shinigami-text">
+          "The person in possession of the Death Note is possessed by a god of death, its original owner, until they die."
+        </Text>
+      </div>
+
+      <Group justify="center" gap="md" className="flex-col sm:flex-row">
         <Button
           component={Link}
           to="/about"
-          size="lg"
-          radius="xl"
-          color="pink"
+          size="md"
+          color="blood"
           variant="filled"
+          className="text-sm md:text-base px-4 py-2 md:px-6 md:py-3 ominous-glow"
           style={{
-            boxShadow: '0 8px 24px rgba(255, 90, 163, 0.3)',
-            fontSize: '1.1rem',
-            padding: '16px 32px'
+            boxShadow: '0 4px 16px rgba(139, 0, 0, 0.3)',
+            letterSpacing: '1px'
           }}
-          className="bounce"
         >
-          💖 Discover More
+          LEARN MORE
         </Button>
         <Button
           component={Link}
           to="/contact"
-          size="lg"
-          radius="xl"
-          color="peach"
+          size="md"
+          color="shinigami"
           variant="filled"
+          className="text-sm md:text-base px-4 py-2 md:px-6 md:py-3 ominous-glow"
           style={{
-            boxShadow: '0 8px 24px rgba(255, 160, 132, 0.3)',
-            fontSize: '1.1rem',
-            padding: '16px 32px'
+            boxShadow: '0 4px 16px rgba(47, 47, 47, 0.3)',
+            letterSpacing: '1px'
           }}
-          className="bounce"
         >
-          📧 Get In Touch
+          CONTACT RYUK
         </Button>
       </Group>
     </Container>

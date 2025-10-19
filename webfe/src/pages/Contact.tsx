@@ -20,120 +20,124 @@ function Contact() {
   };
 
   return (
-    <Container size="lg" className="py-12">
-      <div className="text-center mb-12">
+    <Container size="lg" className="py-6 md:py-12 shinigami-presence">
+      <div className="text-center mb-8 md:mb-12">
         <Title
           order={1}
-          className="gradient-text mb-6"
-          style={{ fontSize: '3rem' }}
+          className="death-note-text mb-4 md:mb-6 flicker text-3xl md:text-5xl"
+          style={{ letterSpacing: '2px md:tracking-[3px]' }}
         >
-          💌 Let's Chat! 💌
+          CONTACT THE SHINIGAMI
         </Title>
-        <Text size="xl" c="dimmed" className="mb-8" style={{ fontSize: '1.2rem' }} >
-          We'd love to hear from you! Send us a message and we'll get back to you with sparkles! ✨
+        <Text size="lg" c="shinigami" className="mb-6 md:mb-8 shinigami-text text-lg md:text-xl">
+          "To communicate with the gods of death, one must possess the Death Note."
         </Text>
       </div>
 
-      <Card shadow="xl" padding="xl" radius="xl" className="cute-card sparkle mb-8">
+      <Card shadow="xl" padding="xl" className="death-note-card ominous-glow mb-8">
         <form onSubmit={handleSubmit}>
           <Stack gap="lg">
             <TextInput
-              label="✨ Your Magical Name"
-              placeholder="What should we call you?"
+              label="Your Name (Write it carefully...)"
+              placeholder="The name you were given at birth"
               value={formData.name}
               onChange={(e) => handleChange('name', e.currentTarget.value)}
               required
               size="lg"
-              radius="lg"
               style={{
-                '--input-radius': '16px',
-                '--input-bd': '3px solid #ffe0f0',
-                '--input-bd-focus': '3px solid #ff5aa3'
+                '--input-radius': '0px',
+                '--input-bd': '2px solid #8B0000',
+                '--input-bd-focus': '2px solid #DC143C',
+                '--input-bg': 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)',
+                '--input-color': '#e0e0e0'
               }}
+              className="shinigami-text"
             />
             <TextInput
-              label="📧 Your Email Address"
+              label="Your Connection to the Human World"
               placeholder="your@email.com"
               type="email"
               value={formData.email}
               onChange={(e) => handleChange('email', e.currentTarget.value)}
               required
               size="lg"
-              radius="lg"
               style={{
-                '--input-radius': '16px',
-                '--input-bd': '3px solid #ffe0f0',
-                '--input-bd-focus': '3px solid #ff5aa3'
+                '--input-radius': '0px',
+                '--input-bd': '2px solid #8B0000',
+                '--input-bd-focus': '2px solid #DC143C',
+                '--input-bg': 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)',
+                '--input-color': '#e0e0e0'
               }}
+              className="shinigami-text"
             />
             <Textarea
-              label="💬 Your Wonderful Message"
-              placeholder="Tell us something amazing..."
+              label="Your Message to the Shinigami Realm"
+              placeholder="What would you ask the gods of death?"
               value={formData.message}
               onChange={(e) => handleChange('message', e.currentTarget.value)}
               rows={6}
               required
               size="lg"
-              radius="lg"
               style={{
-                '--input-radius': '16px',
-                '--input-bd': '3px solid #ffe0f0',
-                '--input-bd-focus': '3px solid #ff5aa3'
+                '--input-radius': '0px',
+                '--input-bd': '2px solid #8B0000',
+                '--input-bd-focus': '2px solid #DC143C',
+                '--input-bg': 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)',
+                '--input-color': '#e0e0e0'
               }}
+              className="shinigami-text"
             />
             <Button
               type="submit"
-              size="lg"
-              radius="xl"
-              color="pink"
+              size="md"
+              color="blood"
               variant="filled"
+              className="text-sm md:text-base px-4 py-2 md:px-6 md:py-3 ominous-glow"
               style={{
-                boxShadow: '0 8px 24px rgba(255, 90, 163, 0.3)',
-                fontSize: '1.1rem',
-                padding: '16px 32px'
+                boxShadow: '0 4px 16px rgba(139, 0, 0, 0.3)',
+                letterSpacing: '1px'
               }}
-              className="bounce"
             >
-              🚀 Send Message with Love!
+              SEND MESSAGE TO RYUK
             </Button>
           </Stack>
         </form>
       </Card>
 
-      <Group justify="center" gap="lg">
+      <div className="rule-of-death-note mb-8">
+        <Text size="lg" c="dimmed" className="shinigami-text">
+          "The human who touches the Death Note can recognize the image and voice of the Shinigami who owns it."
+        </Text>
+      </div>
+
+      <Group justify="center" gap="md" className="flex-col sm:flex-row">
         <Button
           component={Link}
           to="/"
-          size="lg"
-          radius="xl"
-          color="purple"
+          size="md"
+          color="blood"
           variant="filled"
-          leftSection={<span className="text-xl">🏠</span>}
+          className="text-sm md:text-base px-4 py-2 md:px-6 md:py-3 ominous-glow"
           style={{
-            boxShadow: '0 8px 24px rgba(179, 102, 245, 0.3)',
-            fontSize: '1.1rem',
-            padding: '16px 32px'
+            boxShadow: '0 4px 16px rgba(139, 0, 0, 0.3)',
+            letterSpacing: '1px'
           }}
-          className="bounce"
         >
-          Back to Home
+          RETURN TO RULES
         </Button>
         <Button
           component={Link}
           to="/about"
-          size="lg"
-          radius="xl"
-          color="peach"
+          size="md"
+          color="shinigami"
           variant="filled"
-          leftSection={<span className="text-xl">💖</span>}
+          className="text-sm md:text-base px-4 py-2 md:px-6 md:py-3 ominous-glow"
           style={{
-            boxShadow: '0 8px 24px rgba(255, 160, 132, 0.3)',
-            fontSize: '1.1rem',
-            padding: '16px 32px'
+            boxShadow: '0 4px 16px rgba(47, 47, 47, 0.3)',
+            letterSpacing: '1px'
           }}
-          className="bounce"
         >
-          About Us
+          LEARN MORE
         </Button>
       </Group>
     </Container>

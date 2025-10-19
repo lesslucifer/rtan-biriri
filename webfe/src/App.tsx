@@ -5,163 +5,238 @@ import About from './pages/About'
 import Contact from './pages/Contact'
 import './App.css'
 
-const cuteTheme = createTheme({
+const deathNoteTheme = createTheme({
   colors: {
-    pink: [
-      '#fff0f8',
-      '#ffe0f0',
-      '#ffc2e0',
-      '#ff9fce',
-      '#ff7bb8',
-      '#ff5aa3',
-      '#ff3d8f',
-      '#e62a7a',
-      '#cc1f68',
-      '#b31556'
+    deathNote: [
+      '#0a0a0a',
+      '#1a1a1a',
+      '#2a2a2a',
+      '#3a3a3a',
+      '#4a4a4a',
+      '#5a5a5a',
+      '#6a6a6a',
+      '#7a7a7a',
+      '#8a8a8a',
+      '#9a9a9a'
     ],
-    purple: [
-      '#f8f0ff',
-      '#f0e0ff',
-      '#e0c2ff',
-      '#d0a3ff',
-      '#c084fc',
-      '#b366f5',
-      '#a347ee',
-      '#8a2be2',
-      '#7a1fd9',
-      '#6a15c7'
+    blood: [
+      '#8B0000',
+      '#A00000',
+      '#B50000',
+      '#CA0000',
+      '#DC143C',
+      '#FF0000',
+      '#FF3333',
+      '#FF6666',
+      '#FF9999',
+      '#FFCCCC'
     ],
-    mint: [
-      '#f0fff8',
-      '#e0fff0',
-      '#c2ffe0',
-      '#a3ffd0',
-      '#84fcc0',
-      '#66f5b3',
-      '#47eea6',
-      '#2be299',
-      '#1fd98a',
-      '#15c77a'
+    shinigami: [
+      '#2F2F2F',
+      '#404040',
+      '#515151',
+      '#626262',
+      '#737373',
+      '#848484',
+      '#959595',
+      '#A6A6A6',
+      '#B7B7B7',
+      '#C8C8C8'
     ],
-    peach: [
-      '#fff8f0',
-      '#fff0e0',
-      '#ffe0c2',
-      '#ffd0a3',
-      '#ffc084',
-      '#ffb366',
-      '#ffa347',
-      '#ff8a2b',
-      '#f97a1f',
-      '#f06a15'
+    parchment: [
+      '#F5F5DC',
+      '#F0F0D6',
+      '#EBEBD0',
+      '#E6E6CA',
+      '#E1E1C4',
+      '#DCDCBE',
+      '#D7D7B8',
+      '#D2D2B2',
+      '#CDCDAC',
+      '#C8C8A6'
     ],
-    sky: [
-      '#f0f8ff',
-      '#e0f0ff',
-      '#c2e0ff',
-      '#a3d0ff',
-      '#84c0fc',
-      '#66b3f5',
-      '#47a3ee',
-      '#2b8ae2',
-      '#1f7ad9',
-      '#156ac7'
+    ink: [
+      '#000000',
+      '#1A1A1A',
+      '#333333',
+      '#4D4D4D',
+      '#666666',
+      '#808080',
+      '#999999',
+      '#B3B3B3',
+      '#CCCCCC',
+      '#E6E6E6'
     ]
   },
-  primaryColor: 'pink',
-  primaryShade: { light: 5, dark: 5 },
-  fontFamily: 'Comic Sans MS, cursive, sans-serif',
+  primaryColor: 'blood',
+  primaryShade: { light: 0, dark: 0 },
+  fontFamily: 'Crimson Text, serif',
   headings: {
-    fontFamily: 'Comic Sans MS, cursive, sans-serif',
-    fontWeight: '700'
+    fontFamily: 'Cinzel, serif',
+    fontWeight: '600'
   },
   radius: {
-    xs: '8px',
-    sm: '12px',
-    md: '16px',
-    lg: '20px',
-    xl: '24px'
+    xs: '0px',
+    sm: '0px',
+    md: '0px',
+    lg: '0px',
+    xl: '0px'
   },
   spacing: {
-    xs: '6px',
-    sm: '10px',
+    xs: '4px',
+    sm: '8px',
     md: '16px',
     lg: '24px',
     xl: '32px'
+  },
+  components: {
+    Button: {
+      styles: () => ({
+        root: {
+          borderRadius: 0,
+          border: '2px solid #8B0000',
+          background: 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)',
+          color: '#e0e0e0',
+          fontFamily: 'Cinzel, serif',
+          textTransform: 'uppercase',
+          letterSpacing: '2px',
+          position: 'relative',
+          overflow: 'hidden',
+          transition: 'all 0.3s ease',
+          '&:hover': {
+            background: 'linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%)',
+            borderColor: '#DC143C',
+            boxShadow: '0 0 20px rgba(139, 0, 0, 0.5)',
+            transform: 'translateY(-1px)'
+          },
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: '-100%',
+            width: '100%',
+            height: '100%',
+            background: 'linear-gradient(90deg, transparent, rgba(139, 0, 0, 0.2), transparent)',
+            transition: 'left 0.5s'
+          },
+          '&:hover::before': {
+            left: '100%'
+          }
+        }
+      })
+    },
+    Card: {
+      styles: () => ({
+        root: {
+          borderRadius: 0,
+          background: 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)',
+          border: '2px solid #3a3a3a',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.8)',
+          transition: 'all 0.3s ease',
+          position: 'relative',
+          overflow: 'hidden',
+          '&:hover': {
+            borderColor: '#8B0000',
+            boxShadow: '0 12px 40px rgba(139, 0, 0, 0.3)',
+            transform: 'translateY(-2px)'
+          },
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'linear-gradient(45deg, transparent 30%, rgba(139, 0, 0, 0.1) 50%, transparent 70%)',
+            opacity: 0,
+            transition: 'opacity 0.3s ease'
+          },
+          '&:hover::before': {
+            opacity: 1
+          }
+        }
+      })
+    }
   }
 })
 
 function App() {
   return (
-    <MantineProvider theme={cuteTheme}>
+    <MantineProvider theme={deathNoteTheme}>
       <BrowserRouter>
         <AppShell
-          padding="md"
-          header={{ height: 80 }}
+          padding={{ base: 'sm', md: 'md' }}
+          header={{ height: { base: 60, md: 80 } }}
           style={{
             header: {
-              background: 'linear-gradient(135deg, #ff5aa3 0%, #b366f5 100%)'
+              background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%)',
+              borderBottom: '2px solid #8B0000',
+              boxShadow: '0 4px 20px rgba(139, 0, 0, 0.3)'
             }
           }}
         >
-          <div className="flex items-center justify-between h-full px-6">
+          <div className="flex items-center justify-between h-full px-4 md:px-6 shinigami-presence">
             <Text
               size="xl"
               fw={700}
-              c="white"
+              c="blood"
+              className="death-note-text flicker text-base md:text-xl"
               style={{
-                textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
-                fontSize: '28px'
+                textShadow: '2px 2px 4px rgba(139, 0, 0, 0.8)',
+                letterSpacing: '1px md:tracking-[3px]'
               }}
             >
-              🌸 Kawaii App 🌸
+              DEATH NOTE
             </Text>
-            <div className="flex gap-3">
+            <div className="flex gap-1 md:gap-2">
               <Button
                 component={Link}
                 to="/"
                 variant="filled"
-                size="sm"
-                color="mint"
-                radius="lg"
+                size="compact-xs"
+                color="blood"
+                className="text-xs md:text-sm px-2 py-1 md:px-3 md:py-2"
                 style={{
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-                  fontWeight: 600
+                  fontWeight: 600,
+                  letterSpacing: '0.5px',
+                  minWidth: 'fit-content'
                 }}
               >
-                🏠 Home
+                RULES
               </Button>
               <Button
                 component={Link}
                 to="/about"
                 variant="filled"
-                size="sm"
-                color="peach"
-                radius="lg"
+                size="compact-xs"
+                color="shinigami"
+                className="text-xs md:text-sm px-2 py-1 md:px-3 md:py-2"
                 style={{
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-                  fontWeight: 600
+                  fontWeight: 600,
+                  letterSpacing: '0.5px',
+                  minWidth: 'fit-content'
                 }}
               >
-                💖 About
+                MORE
               </Button>
               <Button
                 component={Link}
                 to="/contact"
                 variant="filled"
-                size="sm"
-                color="sky"
-                radius="lg"
+                size="compact-xs"
+                color="ink"
+                className="text-xs md:text-sm px-2 py-1 md:px-3 md:py-2"
                 style={{
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-                  fontWeight: 600
+                  fontWeight: 600,
+                  letterSpacing: '0.5px',
+                  minWidth: 'fit-content'
                 }}
               >
-                📧 Contact
+                CONTACT
               </Button>
             </div>
           </div>
-          <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-mint-50">
+          <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />

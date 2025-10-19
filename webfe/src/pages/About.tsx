@@ -1,31 +1,30 @@
 import { Button, Container, Title, Text, Card, List, ThemeIcon } from '@mantine/core';
 import { Link } from 'react-router-dom';
-import { IconHeart } from '@tabler/icons-react';
+import { IconSkull } from '@tabler/icons-react';
 
 function About() {
   return (
-    <Container size="lg" className="py-12">
-      <div className="text-center mb-12">
+    <Container size="lg" className="py-6 md:py-12 shinigami-presence">
+      <div className="text-center mb-8 md:mb-12">
         <Title
           order={1}
-          className="gradient-text mb-6"
-          style={{ fontSize: '3rem' }}
+          className="death-note-text mb-4 md:mb-6 flicker text-3xl md:text-5xl"
+          style={{ letterSpacing: '2px md:tracking-[3px]' }}
         >
-          🌟 About Our Kawaii World 🌟
+          THE SHINIGAMI REALM
         </Title>
-        <Text size="xl" c="dimmed" className="mb-8" style={{ fontSize: '1.2rem' }} >
-          Welcome to our magical corner of the internet where everything is colorful, cute, and full of joy! 💖
+        <Text size="lg" c="shinigami" className="mb-6 md:mb-8 shinigami-text text-lg md:text-xl">
+          "The gods of death have existed since the beginning of time, observing the human world with detached curiosity."
         </Text>
       </div>
 
-      <Card shadow="xl" padding="xl" radius="xl" className="cute-card mb-8">
-        <Text size="lg" className="mb-6" style={{ lineHeight: 1.8 }} >
-          ✨ We've created a delightful web experience that combines the power of React Router DOM
-          with the beauty of Mantine UI components. Our mission is to make every interaction
-          feel magical and bring smiles to your face! 🌈
+      <Card shadow="xl" padding="xl" className="death-note-card mb-8 ominous-glow">
+        <Text size="lg" className="mb-6 shinigami-text" style={{ lineHeight: 1.8 }} >
+          The Death Note is a supernatural notebook that grants its user the ability to kill anyone by writing their name while picturing their face.
+          This dark power comes with strict rules and consequences that bind both the human user and the Shinigami who owns the note.
         </Text>
-        <Text size="lg" className="mb-8" fw={600} c="pink" >
-          🎀 What makes our app special:
+        <Text size="lg" className="mb-8 death-note-text" fw={600} c="blood" >
+          The Rules of the Death Note:
         </Text>
 
         <List
@@ -33,64 +32,64 @@ function About() {
           size="lg"
           center
           icon={
-            <ThemeIcon color="pink" size={24} radius="xl">
-              <IconHeart size={16} />
+            <ThemeIcon color="blood" size={24} radius={0}>
+              <IconSkull size={16} />
             </ThemeIcon>
           }
         >
           <List.Item>
-            <Text fw={600} c="purple">Client-side routing</Text> with React Router DOM -
-            <Text span c="dimmed">Smooth navigation between magical pages ✨</Text>
+            <Text fw={600} c="blood">The Name Rule</Text> -
+            <Text span c="dimmed" className="shinigami-text">The human whose name is written in this note shall die</Text>
           </List.Item>
           <List.Item>
-            <Text fw={600} c="mint">Mantine UI components</Text> -
-            <Text span c="dimmed">Beautiful, accessible, and customizable 🎨</Text>
+            <Text fw={600} c="blood">The Face Rule</Text> -
+            <Text span c="dimmed" className="shinigami-text">The writer must have the person's face in their mind</Text>
           </List.Item>
           <List.Item>
-            <Text fw={600} c="peach">Responsive design</Text> -
-            <Text span c="dimmed">Perfect on desktop, tablet, and mobile 📱</Text>
+            <Text fw={600} c="blood">The Time Rule</Text> -
+            <Text span c="dimmed" className="shinigami-text">The death will occur 40 seconds after the name is written</Text>
           </List.Item>
           <List.Item>
-            <Text fw={600} c="sky">Colorful animations</Text> -
-            <Text span c="dimmed">Playful interactions that spark joy! 🌟</Text>
+            <Text fw={600} c="blood">The Ownership Rule</Text> -
+            <Text span c="dimmed" className="shinigami-text">The human who touches the Death Note can see the Shinigami</Text>
           </List.Item>
         </List>
       </Card>
 
-      <div className="flex justify-center gap-6">
+      <div className="rule-of-death-note mb-8">
+        <Text size="lg" c="dimmed" className="shinigami-text">
+          "The person in possession of the Death Note is possessed by a god of death, its original owner, until they die."
+        </Text>
+      </div>
+
+      <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-6">
         <Button
           component={Link}
           to="/"
-          size="lg"
-          radius="xl"
-          color="purple"
+          size="md"
+          color="blood"
           variant="filled"
-          leftSection={<span className="text-xl">🏠</span>}
+          className="text-sm md:text-base px-4 py-2 md:px-6 md:py-3 ominous-glow"
           style={{
-            boxShadow: '0 8px 24px rgba(179, 102, 245, 0.3)',
-            fontSize: '1.1rem',
-            padding: '16px 32px'
+            boxShadow: '0 4px 16px rgba(139, 0, 0, 0.3)',
+            letterSpacing: '1px'
           }}
-          className="bounce"
         >
-          Back to Home
+          RETURN TO RULES
         </Button>
         <Button
           component={Link}
           to="/contact"
-          size="lg"
-          radius="xl"
-          color="mint"
+          size="md"
+          color="shinigami"
           variant="filled"
-          leftSection={<span className="text-xl">💌</span>}
+          className="text-sm md:text-base px-4 py-2 md:px-6 md:py-3 ominous-glow"
           style={{
-            boxShadow: '0 8px 24px rgba(102, 245, 179, 0.3)',
-            fontSize: '1.1rem',
-            padding: '16px 32px'
+            boxShadow: '0 4px 16px rgba(47, 47, 47, 0.3)',
+            letterSpacing: '1px'
           }}
-          className="bounce"
         >
-          Contact Us
+          CONTACT RYUK
         </Button>
       </div>
     </Container>

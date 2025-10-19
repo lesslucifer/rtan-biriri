@@ -1,14 +1,14 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;500;600;700&display=swap');
 
 :root {
-  font-family: 'Comic Neue', cursive, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Crimson Text', serif, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.6;
   font-weight: 400;
 
-  color-scheme: light;
-  color: #4a4a4a;
-  background-color: #fff0f8;
+  color-scheme: dark;
+  color: #e0e0e0;
+  background-color: #0a0a0a;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -24,7 +24,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background: linear-gradient(135deg, #fff0f8 0%, #f0f0ff 50%, #f0fff8 100%);
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
   background-attachment: fixed;
 }
 
@@ -32,114 +32,191 @@ body {
   min-height: 100vh;
 }
 
-/* Cute animations */
-@keyframes bounce {
-  0%, 20%, 53%, 80%, 100% {
-    transform: translate3d(0,0,0);
-  }
-  40%, 43% {
-    transform: translate3d(0, -8px, 0);
-  }
-  70% {
-    transform: translate3d(0, -4px, 0);
-  }
-  90% {
-    transform: translate3d(0, -2px, 0);
-  }
+/* Death Note animations */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
 }
 
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+@keyframes typewriter {
+  0% { width: 0; }
+  100% { width: 100%; }
 }
 
-@keyframes wiggle {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(5deg); }
-  50% { transform: rotate(-5deg); }
-  75% { transform: rotate(3deg); }
-  100% { transform: rotate(0deg); }
+@keyframes ominous-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(139, 0, 0, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(139, 0, 0, 0.6); }
 }
 
-.bounce {
-  animation: bounce 2s infinite;
+@keyframes death-god-shadow {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
-.float {
-  animation: float 3s ease-in-out infinite;
+.flicker {
+  animation: flicker 3s ease-in-out infinite;
 }
 
-.wiggle {
-  animation: wiggle 1s ease-in-out infinite;
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typewriter 2s steps(40, end);
 }
 
-/* Cute button styles */
-.cute-button {
-  border-radius: 20px;
-  border: 3px solid transparent;
+.ominous-glow {
+  animation: ominous-glow 4s ease-in-out infinite;
+}
+
+/* Death Note button styles */
+.death-note-button {
+  border-radius: 0;
+  border: 2px solid #8B0000;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  color: #e0e0e0;
   padding: 12px 24px;
   font-size: 1em;
-  font-weight: 700;
-  font-family: inherit;
+  font-weight: 600;
+  font-family: 'Cinzel', serif;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.cute-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-}
-
-.cute-button:active {
-  transform: translateY(0px);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, #ff5aa3 0%, #b366f5 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 700;
-}
-
-/* Cute card styles */
-.cute-card {
-  border-radius: 24px;
-  background: white;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-  border: 3px solid #ffe0f0;
-  transition: all 0.3s ease;
-}
-
-.cute-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.15);
-  border-color: #ffc2e0;
-}
-
-/* Sparkle effect */
-.sparkle {
+  letter-spacing: 2px;
   position: relative;
   overflow: hidden;
 }
 
-.sparkle::before {
-  content: '✨';
+.death-note-button::before {
+  content: '';
   position: absolute;
-  top: -10px;
-  right: -10px;
-  font-size: 20px;
-  animation: float 2s ease-in-out infinite;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(139, 0, 0, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.death-note-button:hover::before {
+  left: 100%;
+}
+
+.death-note-button:hover {
+  background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
+  border-color: #DC143C;
+  box-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
+  transform: translateY(-1px);
+}
+
+.death-note-button:active {
+  transform: translateY(0);
+  box-shadow: 0 0 10px rgba(139, 0, 0, 0.3);
+}
+
+/* Death Note text styles */
+.death-note-text {
+  font-family: 'Cinzel', serif;
+  color: #e0e0e0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  letter-spacing: 1px;
+}
+
+.shinigami-text {
+  font-family: 'Crimson Text', serif;
+  font-style: italic;
+  color: #8B0000;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);
+}
+
+/* Death Note card styles */
+.death-note-card {
+  border-radius: 0;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  border: 2px solid #3a3a3a;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.death-note-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(139, 0, 0, 0.1) 50%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.death-note-card:hover::before {
+  opacity: 1;
+}
+
+.death-note-card:hover {
+  border-color: #8B0000;
+  box-shadow: 0 12px 40px rgba(139, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Rule of the Death Note */
+.rule-of-death-note {
+  border-left: 4px solid #8B0000;
+  padding-left: 16px;
+  margin: 16px 0;
+  font-style: italic;
+  color: #b0b0b0;
+  position: relative;
+}
+
+.rule-of-death-note::before {
+  content: '§';
+  position: absolute;
+  left: -8px;
+  top: -4px;
+  color: #8B0000;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+/* Shinigami presence */
+.shinigami-presence {
+  position: relative;
+}
+
+.shinigami-presence::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(139, 0, 0, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .death-note-text {
+    font-size: 1.5rem !important;
+  }
+
+  .shinigami-text {
+    font-size: 1rem !important;
+  }
+
+  .death-note-button {
+    padding: 8px 16px !important;
+    font-size: 0.875rem !important;
+  }
+
+  .death-note-card {
+    padding: 1rem !important;
+  }
+
+  .rule-of-death-note {
+    padding-left: 12px !important;
+    margin: 12px 0 !important;
+  }
 }
