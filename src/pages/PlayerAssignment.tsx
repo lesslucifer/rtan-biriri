@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { X, UserCircle, Loader2 } from 'lucide-react';
 import { useFirebase } from '../hooks/useFirebase';
+import { useGameState } from '../hooks/useGameState';
 import { Player, Color, PLAYER_NAMES, GAME_ROLES } from '../types/playerAssignment';
 import type { PlayerAssignment, GameRole } from '../types/playerAssignment';
 
@@ -80,6 +81,8 @@ export default function PlayerAssignment() {
   } = useFirebase<PlayerAssignment>({
     collectionName: 'playerAssignments'
   });
+
+  const { state: gameState, init: initGame } = useGameState();
 
   const assignments = useMemo(() => {
     return (firebaseAssignments ?? [])?.reduce((playerAssignments, assign) => {
@@ -244,11 +247,16 @@ export default function PlayerAssignment() {
           );
         })}
 
-        <div className="mt-4 mb-12 text-center">
-          <p className="text-xs text-white/70">
-            Tap a color to assign it to the player
-          </p>
-        </div>
+        {!gameState?.id && (
+          <div className="mt-6 flex justify-center">
+            <button
+              onClick={initGame}
+              className="bg-gradient-to-r from-purple-600 to-purple-400 text-white font-bold text-base px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:from-purple-700 hover:to-purple-500 transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0"
+            >
+              Start Game
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

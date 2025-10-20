@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { createFirebaseService } from '../services/firebaseService';
 import { onSnapshot, collection, query, QueryConstraint } from 'firebase/firestore';
 import { db } from '../config/firebase';
@@ -14,11 +14,13 @@ export interface UseFirebaseRealtimeOptions {
 
 export interface UseFirebaseRealtimeReturn<T extends DocumentData> {
   data: T[];
+  firstData?: T;
   isLoading: boolean;
   isError: boolean;
   error: Error | null;
   create: (data: Omit<T, 'id'>) => Promise<string>;
   update: (id: string, data: Partial<T>) => Promise<void>;
+  upsert: (data: Partial<T>, defaultValue: T) => Promise<string>
   delete: (id: string) => Promise<void>;
   refetch: () => void;
 }
@@ -44,14 +46,6 @@ export function useFirebase<T extends DocumentData = DocumentData>({
       : collection(db, collectionName);
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-        // console.log("NEW SNAP_SHOT", snapshot)
-        // if (!snapshot.metadata.fromCache) {
-        //   const data = snapshot.docs.map(doc => ({
-        //     id: doc.id,
-        //     ...doc.data()
-        //   } as unknown as T));
-  
-        // }
         const data = snapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data()
@@ -61,7 +55,6 @@ export function useFirebase<T extends DocumentData = DocumentData>({
       },
       (error) => {
         console.error('Realtime listener error:', error);
-        // queryClient.setQueryData(queryKey, []);
       }
     );
 
@@ -138,13 +131,32 @@ export function useFirebase<T extends DocumentData = DocumentData>({
     }
   });
 
+  const updateMutateAsync = updateMutation.mutateAsync
+  const createMutateAsync = createMutation.mutateAsync
+
+  const update = useCallback((id: string, data: Partial<T>) => updateMutateAsync({ id, data }), [updateMutateAsync])
+  const upsert = useCallback(async (data: Partial<T>, defaultValue: T) => {
+    if (data.id) {
+      await updateMutateAsync({ id: data.id, data })
+      return data.id
+    }
+    else {
+      return await createMutateAsync({
+        ...defaultValue,
+        ...data
+      })
+    }
+  }, [createMutateAsync, updateMutateAsync])
+
   return {
     data,
+    firstData: data?.length > 0 ? data[0] : undefined,
     isLoading,
     isError,
     error,
     create: createMutation.mutateAsync,
-    update: (id: string, data: Partial<T>) => updateMutation.mutateAsync({ id, data }),
+    update,
+    upsert,
     delete: deleteMutation.mutateAsync,
     refetch,
   };

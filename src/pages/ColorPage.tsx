@@ -6,6 +6,7 @@ import { useFirebase } from '../hooks/useFirebase';
 import { Color } from '../types/playerAssignment';
 import type { PlayerAssignment } from '../types/playerAssignment';
 import { getRoleComponent } from '../components/roles';
+import { useGameState } from '@/hooks/useGameState';
 
 const colorConfig: Record<Color, {
   bgClass: string;
@@ -55,11 +56,13 @@ export default function ColorPage() {
   const { color } = useParams<{ color: string }>();
   const {
     data: firebaseAssignments,
-    isLoading,
+    isLoading: paLoading,
     error,
   } = useFirebase<PlayerAssignment>({
     collectionName: 'playerAssignments'
   });
+
+  const { state: gameState, isLoading: gsLoading } = useGameState()
 
   const normalizedColor = color ? color.charAt(0).toUpperCase() + color.slice(1).toLowerCase() : '';
   const isValidColor = normalizedColor && Object.values(Color).includes(normalizedColor as Color);
@@ -75,7 +78,7 @@ export default function ColorPage() {
 
   const config = colorConfig[normalizedColor as Color];
 
-  if (isLoading || !playerAssignment) {
+  if (!playerAssignment || paLoading || !gameState || gsLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-600 to-purple-300">
         <Loader2 className="w-16 h-16 text-white animate-spin" />
