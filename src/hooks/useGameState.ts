@@ -1,16 +1,31 @@
 import { useCallback } from "react";
 import { useFirebase } from "./useFirebase";
 
+export type STATUS_4C = 'NEW' | 'OPENED_4C' | 'REVEALED_HINT' | 'COMPLETED'
+export type STATUS_5H = 'NEW' | 'OPENED_5H' | 'OPEN_HINT' | 'COMPLETED'
+export type STATUS_9D = 'NEW' | 'OPENED_9D' | 'OPEN_HINT' | 'COMPLETED'
+export type STATUS_5C = 'NEW' | 'OPENED_5C' | 'OPEN_HINT' | 'COMPLETED'
+export type STATUS_6S = 'NEW' | 'OPENED_6S' | 'OPEN_HINT' | 'COMPLETED'
+
 export interface GameState {
     id?: string;
     createdAt?: Date;
     updatedAt?: Date;
 
-    closed4C: boolean;
+    _4cStatus: STATUS_4C
+    _4cHintSuit?: 'D' | 'H' | 'S'
+    _5hStatus: STATUS_5H
+    _9dStatus: STATUS_9D
+    _5cStatus: STATUS_5C
+    _6sStatus: STATUS_6S
 }
 
 const DEFAULT_STATE: GameState = {
-    closed4C: false
+    _4cStatus: 'NEW',
+    _5hStatus: 'NEW',
+    _9dStatus: 'NEW',
+    _5cStatus: 'NEW',
+    _6sStatus: 'NEW'
 }
 
 export const useGameState = () => {
@@ -30,7 +45,7 @@ export const useGameState = () => {
         return state?.id
     }, [state, create])
 
-    const update = useCallback((newState: GameState) => {
+    const update = useCallback((newState: Partial<GameState>) => {
         return state?.id ? fbUpdate(state?.id, newState) : undefined
     }, [fbUpdate, state?.id])
 
