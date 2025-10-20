@@ -1,3 +1,5 @@
+import type { Timestamp } from "firebase/firestore";
+
 export const Player = {
   // TR: 'TR',
   TH: 'TH',
@@ -44,6 +46,6 @@ export interface PlayerAssignment {
   color: Color;
   player: Player;
   role: GameRole;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt?: Timestamp;
+  updatedAt?: Timestamp;
 }

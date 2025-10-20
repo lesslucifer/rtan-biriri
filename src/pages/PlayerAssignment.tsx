@@ -111,9 +111,7 @@ export default function PlayerAssignment() {
       await create({
         color,
         player,
-        role,
-        createdAt: new Date(),
-        updatedAt: new Date()
+        role
       });
     }
 
@@ -128,9 +126,7 @@ export default function PlayerAssignment() {
       await create({
         color: lastColor,
         player: lastPlayer,
-        role: lastRole,
-        createdAt: new Date(),
-        updatedAt: new Date()
+        role: lastRole
       });
     }
   };
