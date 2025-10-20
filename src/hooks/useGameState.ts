@@ -4,7 +4,7 @@ import type { Timestamp } from "firebase/firestore";
 
 export type STATUS_4C = 'NEW' | 'OPENED_4C' | 'REVEALED_HINT' | 'COMPLETED'
 export type STATUS_5H = 'NEW' | 'OPENED_5H' | 'OPEN_HINT' | 'COMPLETED'
-export type STATUS_9D = 'NEW' | 'OPENED_9D' | 'OPEN_HINT' | 'COMPLETED'
+export type STATUS_9D = 'NEW' | 'COMPLETED'
 export type STATUS_5C = 'NEW' | 'COMPLETED'
 export type STATUS_6S = 'NEW' | 'OPENED_6S' | 'OPEN_HINT' | 'COMPLETED'
 
@@ -17,7 +17,9 @@ export interface GameState {
     _4cHintSuit?: 'D' | 'H' | 'S'
 
     _5hStatus: STATUS_5H
+
     _9dStatus: STATUS_9D
+    _9dCurrentLevel: number
 
     _5cStatus: STATUS_5C
     _5cUsedTime: number
@@ -33,6 +35,7 @@ const DEFAULT_STATE: GameState = {
     _5hStatus: 'NEW',
 
     _9dStatus: 'NEW',
+    _9dCurrentLevel: 0,
 
     _5cStatus: 'NEW',
     _5cHintIndices: { D: 0, H: 0, S: 0 },
