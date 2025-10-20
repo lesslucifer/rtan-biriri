@@ -91,7 +91,7 @@ export default function Card({ card, mode = 'normal', scale = 1, style }: CardPr
         <span
           className="absolute font-['Abril_Fatface'] font-bold"
           style={{
-            top: '7%',
+            top: '5%',
             left: '18%',
             fontSize: `${rankFontSize}rem`,
           }}
@@ -101,7 +101,7 @@ export default function Card({ card, mode = 'normal', scale = 1, style }: CardPr
         <span
           className="absolute font-['Suits']"
           style={{
-            top: '48%',
+            top: '40%',
             left: '38%',
             fontSize: `${suitFontSize}rem`,
           }}

@@ -22,6 +22,8 @@ const config: Config = {
       fontFamily: {
         'suits': ['Suits', 'sans-serif'],
         'abril': ['Abril Fatface', 'cursive'],
+        'bangers': ['Bangers', 'cursive'],
+        'nunito': ['Nunito', 'sans-serif'],
       },
       borderRadius: {
         lg: 'var(--radius)',

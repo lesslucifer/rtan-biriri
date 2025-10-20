@@ -6,12 +6,10 @@ import ColorPage from './pages/ColorPage'
 function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen ">
-        <Routes>
-          <Route path="/ad24r7" element={<PlayerAssignment />} />
-          <Route path="/color/:color" element={<ColorPage />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/ad24r7" element={<PlayerAssignment />} />
+        <Route path="/color/:color" element={<ColorPage />} />
+      </Routes>
     </BrowserRouter>
   )
 }

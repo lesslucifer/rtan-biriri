@@ -6,14 +6,15 @@ export default function FourOfClubs() {
   const card = getRoleCard(GAME_ROLES._4C);
 
   return (
-    <div className="space-y-6">
-      <div className="bg-white rounded-2xl shadow-lg px-6 py-8 border-2 border-purple-100">
-        <div className="text-center mb-4">
-          <div className="flex justify-center mb-4">
-            <Card card={card} scale={0.8} />
-          </div>
-          <h2 className="text-3xl font-bold text-purple-600 mb-2">4 of Clubs ♣</h2>
-          <p className="text-lg font-semibold text-gray-700">The Spy</p>
+    <div className="w-full min-h-screen flex items-center justify-center p-2">
+      <div className="bg-white rounded-2xl shadow-lg px-6 py-8 border-2 border-purple-100 w-full max-w-2xl">
+        <div className="text-center mb-6">
+          <p className="text-md font-semibold text-gray-700">Trò chơi</p>
+          <h2 className="text-3xl font-bold text-purple-600 mb-2">Săn phù thủy</h2>
+          <p className="text-lg font-semibold text-gray-700">Độ khó</p>
+            <div className="flex justify-center">
+              <Card card={card} scale={0.6} />
+            </div>
         </div>
 
         <div className="space-y-4 text-gray-700">
