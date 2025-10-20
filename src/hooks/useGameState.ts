@@ -3,7 +3,7 @@ import { useFirebase } from "./useFirebase";
 import type { Timestamp } from "firebase/firestore";
 
 export type STATUS_4C = 'NEW' | 'OPENED_4C' | 'REVEALED_HINT' | 'COMPLETED'
-export type STATUS_5H = 'NEW' | 'OPENED_5H' | 'OPEN_HINT' | 'COMPLETED'
+export type STATUS_5H = 'NEW' | 'COMPLETED'
 export type STATUS_9D = 'NEW' | 'COMPLETED'
 export type STATUS_5C = 'NEW' | 'COMPLETED'
 export type STATUS_6S = 'NEW' | 'OPENED_6S' | 'OPEN_HINT' | 'COMPLETED'
