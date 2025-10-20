@@ -96,8 +96,8 @@ export default function ColorPage() {
   }
 
   return (
-    <div className={`min-h-screen flex items-center justify-center bg-gradient-to-br ${config.gradientClass} px-4 py-4`}>
-      <div className="w-full h-full">
+    <div className={`min-h-screen flex justify-center bg-gradient-to-br ${config.gradientClass} px-4 py-4`}>
+      <div className="w-full h-full mt-8">
         {(() => {
           const RoleComponent = getRoleComponent(playerAssignment.role);
           return <RoleComponent />;
