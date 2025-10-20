@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { X, UserCircle, Loader2 } from 'lucide-react';
 import { useFirebase } from '../hooks/useFirebase';
-import { Player, Color, PLAYER_NAMES } from '../types/playerAssignment';
-import type { PlayerAssignment } from '../types/playerAssignment';
+import { Player, Color, PLAYER_NAMES, GAME_ROLES } from '../types/playerAssignment';
+import type { PlayerAssignment, GameRole } from '../types/playerAssignment';
 
 const colorConfig = [
   {
@@ -50,26 +50,24 @@ const colorConfig = [
     borderClass: 'border-orange-200',
     shadowClass: 'shadow-orange-600/20',
     hoverClass: 'hover:bg-orange-600 hover:shadow-orange-600/25'
-  },
-  {
-    color: Color.BLACK,
-    bgClass: 'bg-gray-50',
-    bgColor: 'bg-gray-800',
-    textClass: 'text-gray-800',
-    borderClass: 'border-gray-200',
-    shadowClass: 'shadow-gray-800/20',
-    hoverClass: 'hover:bg-gray-800 hover:shadow-gray-800/25'
   }
 ];
 
 const players = [
-  Player.TR,
   Player.TH,
   Player.GI,
   Player.TY,
   Player.NA,
   Player.L
 ];
+
+const ROLE_FALLBACK: Record<Player, GameRole[]> = {
+  [Player.L]: [GAME_ROLES._4C],
+  [Player.GI]: [GAME_ROLES._5H, GAME_ROLES._6S, GAME_ROLES._5C, GAME_ROLES._9D],
+  [Player.TH]: [GAME_ROLES._5H, GAME_ROLES._9D, GAME_ROLES._6S, GAME_ROLES._5C],
+  [Player.TY]: [GAME_ROLES._5H, GAME_ROLES._5C, GAME_ROLES._9D, GAME_ROLES._6S],
+  [Player.NA]: [GAME_ROLES._5H, GAME_ROLES._5C, GAME_ROLES._9D, GAME_ROLES._6S]
+};
 
 export default function PlayerAssignment() {
   const {
@@ -90,15 +88,27 @@ export default function PlayerAssignment() {
     }, {} as Record<Player, Color | null>)
   }, [firebaseAssignments]);
 
+  const getAssignedRoles = () => {
+    return (firebaseAssignments ?? []).map(a => a.role);
+  };
+
+  const determineRole = (player: Player, color: Color): GameRole => {
+    const assignedRoles = getAssignedRoles();
+    const fallbackList = ROLE_FALLBACK[player];
+    return fallbackList.find(role => !assignedRoles.includes(role) && (role !== GAME_ROLES._5H || color === Color.BLUE)) ?? fallbackList[0]
+  };
+
   const handleColorSelect = async (player: Player, color: Color) => {
     const existingAssignment = firebaseAssignments?.find(a => a.player === player);
+    const role = determineRole(player, color);
 
     if (existingAssignment) {
-      await update(existingAssignment.id!, { ...existingAssignment, color });
+      await update(existingAssignment.id!, { ...existingAssignment, color, role });
     } else {
       await create({
         color,
         player,
+        role,
         createdAt: new Date(),
         updatedAt: new Date()
       });
@@ -110,10 +120,12 @@ export default function PlayerAssignment() {
     if (availableColors.length === 1 && unassignedPlayers.length === 1) {
       const lastColor = availableColors[0];
       const lastPlayer = unassignedPlayers[0];
+      const lastRole = determineRole(lastPlayer, lastColor);
 
       await create({
         color: lastColor,
         player: lastPlayer,
+        role: lastRole,
         createdAt: new Date(),
         updatedAt: new Date()
       });
@@ -190,11 +202,20 @@ export default function PlayerAssignment() {
 
               <div className={`${colorInfo?.bgClass || 'bg-gray-50'} min-h-[80px] p-4 flex items-center justify-center`}>
                 {assignedColor ? (
-                  <div className={`${colorInfo?.bgColor} text-white px-7 py-3.5 rounded-xl inline-flex items-center gap-2.5 shadow-lg ${colorInfo?.shadowClass} border-2 border-white`}>
-                    <div className="w-5 h-5 rounded-full bg-white/30 border-2 border-white" />
-                    <span className="font-bold text-lg tracking-wide">
-                      {assignedColor}
-                    </span>
+                  <div className="flex flex-col items-center gap-2">
+                    <div className={`${colorInfo?.bgColor} text-white px-7 py-3.5 rounded-xl inline-flex items-center gap-2.5 shadow-lg ${colorInfo?.shadowClass} border-2 border-white`}>
+                      <div className="w-5 h-5 rounded-full bg-white/30 border-2 border-white" />
+                      <span className="font-bold text-lg tracking-wide">
+                        {assignedColor}
+                      </span>
+                    </div>
+                    {/* {assignedRole && (
+                      <div className="bg-white/80 backdrop-blur-sm px-4 py-1.5 rounded-lg border-2 border-purple-200 shadow-sm">
+                        <span className="font-semibold text-purple-700 text-sm">
+                          Role: {assignedRole}
+                        </span>
+                      </div>
+                    )} */}
                   </div>
                 ) : (
                   <div className="flex flex-wrap items-center justify-center gap-2">

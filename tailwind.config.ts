@@ -9,6 +9,20 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        flip: {
+          'from': {
+            transform: 'perspective(400px) rotate3d(0, 1, 0, 90deg)',
+          },
+          'to': {
+            transform: 'perspective(400px)',
+          },
+        },
+      },
+      fontFamily: {
+        'suits': ['Suits', 'sans-serif'],
+        'abril': ['Abril Fatface', 'cursive'],
+      },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
