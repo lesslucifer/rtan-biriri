@@ -35,6 +35,7 @@ export const GAME_ROLES = {
   _5C: '5C',
   _4C: '4C',
   _6S: '6S',
+  _100H: '100H',
 } as const;
 
 export type GameRole = typeof GAME_ROLES[keyof typeof GAME_ROLES];

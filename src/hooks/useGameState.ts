@@ -7,6 +7,7 @@ export type STATUS_5H = 'NEW' | 'COMPLETED'
 export type STATUS_9D = 'NEW' | 'COMPLETED'
 export type STATUS_5C = 'NEW' | 'COMPLETED'
 export type STATUS_6S = 'NEW' | 'COMPLETED'
+export type STATUS_100H = 'NEW'
 
 export interface GameState {
     id?: string;
@@ -25,8 +26,10 @@ export interface GameState {
     _5cUsedTime: number
     _5cHintIndices?: { D: number; H: number; S: number }
     _5cCurrentHint?: { suit: 'D' | 'H' | 'S'; index: number }
-    
+
     _6sStatus: STATUS_6S
+
+    _100hStatus: STATUS_100H
 }
 
 const DEFAULT_STATE: GameState = {
@@ -41,7 +44,9 @@ const DEFAULT_STATE: GameState = {
     _5cHintIndices: { D: 0, H: 0, S: 0 },
     _5cUsedTime: 0,
 
-    _6sStatus: 'NEW'
+    _6sStatus: 'NEW',
+
+    _100hStatus: 'NEW'
 }
 
 export const useGameState = () => {

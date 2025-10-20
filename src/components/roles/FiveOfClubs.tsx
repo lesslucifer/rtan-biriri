@@ -43,6 +43,13 @@ export default function FiveOfClubs() {
     return playerAssignments?.find(a => a.role === GAME_ROLES._5C)?.color;
   }, [playerAssignments]);
 
+  const otherGamescompletion = {
+    D: state?._9dStatus === 'COMPLETED',
+    H: state?._5hStatus === 'COMPLETED',
+    S: state?._6sStatus === 'COMPLETED'
+  };
+  const allGamesCompleted = Object.values(otherGamescompletion).findIndex(v => !v) < 0;
+
   const totalHints = useMemo(() => {
     return HINTS.D.length + HINTS.H.length + HINTS.S.length;
   }, []);
@@ -69,6 +76,12 @@ export default function FiveOfClubs() {
     });
   };
 
+  const handleCompleteGame = async () => {
+    await update({
+      _5cStatus: 'COMPLETED',
+    });
+  };
+
   useEffect(() => {
     if (state._5cStatus !== 'NEW') return
 
@@ -80,15 +93,15 @@ export default function FiveOfClubs() {
   }, [state._5cStatus]);
 
   const revealHintError = useMemo(() => {
-    if (!state?.createdAt || !state?._5cHintIndices) return 'NO_MORE';
-
+    if (allGamesCompleted) return 'NO_MORE';
+    if (!selectedSuit || !state?.createdAt || !state?._5cHintIndices) return 'NO_MORE';
     const currentIndex = state._5cHintIndices[selectedSuit];
     const hintsForSuit = HINTS[selectedSuit];
 
     if (currentIndex >= hintsForSuit.length) return 'NO_MORE';
 
     return timeBank >= HINT_COST_MINUTES * 60 * 1000 ? undefined : 'TIME' ;
-  }, [state?.createdAt, state?._5cHintIndices, selectedSuit, timeBank]);
+  }, [allGamesCompleted, state?.createdAt, state?._5cHintIndices, selectedSuit, timeBank]);
 
   const canRevealHint = !revealHintError
 
@@ -198,7 +211,8 @@ export default function FiveOfClubs() {
               const currentIndex = state._5cHintIndices?.[suit] ?? 0;
               const hintsForSuit = HINTS[suit];
               const remaining = hintsForSuit.length - currentIndex;
-              const isDisabled = remaining <= 0;
+              const isCompleted = otherGamescompletion[suit];
+              const isDisabled = isCompleted || remaining <= 0;
 
               return (
                 <label
@@ -214,12 +228,15 @@ export default function FiveOfClubs() {
                     disabled={isDisabled}
                     className="w-5 h-5 text-green-600 focus:ring-green-500 mb-2"
                   />
-                  <span
-                    className="text-2xl font-['Suits'] mb-1"
-                    style={{ color: SUIT_COLORS[suit] }}
-                  >
-                    {SUIT_SYMBOLS[suit]}
-                  </span>
+                  <div className="flex items-center gap-1">
+                    <span
+                      className="text-2xl font-['Suits']"
+                      style={{ color: SUIT_COLORS[suit] }}
+                    >
+                      {SUIT_SYMBOLS[suit]}
+                      {isCompleted && <span className="text-green-600 font-bold">✓</span>}
+                    </span>
+                  </div>
                   <span className="text-sm text-gray-600">
                     {remaining} hint{remaining !== 1 ? 's' : ''} left
                   </span>
@@ -229,19 +246,28 @@ export default function FiveOfClubs() {
           </div>
 
           <div className="flex justify-center">
-            <button
-              onClick={() => handleRevealHint(selectedSuit)}
-              disabled={!canRevealHint}
-              className={`font-semibold px-6 py-3 rounded-lg shadow-md transition-colors duration-200 ${
-                canRevealHint
-                  ? 'bg-green-600 hover:bg-green-700 text-white'
-                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              }`}
-            >
-              {revealHintError === 'NO_MORE' ? 'No more hint'
-                : revealHintError === 'TIME' ? `Wait for ${formatTime(HINT_COST_MINUTES * 60 * 1000 - timeBank)}`
-                : 'Reveal'}
-            </button>
+            {allGamesCompleted ? (
+              <button
+                onClick={handleCompleteGame}
+                className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition-colors duration-200"
+              >
+                Complete Game
+              </button>
+            ) : (
+              <button
+                onClick={() => handleRevealHint(selectedSuit)}
+                disabled={!canRevealHint}
+                className={`font-semibold px-6 py-3 rounded-lg shadow-md transition-colors duration-200 ${
+                  canRevealHint
+                    ? 'bg-green-600 hover:bg-green-700 text-white'
+                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                }`}
+              >
+                {revealHintError === 'NO_MORE' ? 'No more hints'
+                  : revealHintError === 'TIME' ? `Wait for ${formatTime(HINT_COST_MINUTES * 60 * 1000 - timeBank)}`
+                  : 'Reveal'}
+              </button>
+            )}
           </div>
         </div>
       </div>

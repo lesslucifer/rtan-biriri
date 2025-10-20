@@ -29,6 +29,13 @@ export default function FourOfClubs() {
     return playerAssignments?.find(a => a.role === GAME_ROLES._4C)?.color;
   }, [playerAssignments]);
 
+  const otherGamescompletion = {
+    D: state?._9dStatus === 'COMPLETED',
+    H: state?._5hStatus === 'COMPLETED',
+    S: state?._6sStatus === 'COMPLETED'
+  };
+  const allGamesCompleted = Object.values(otherGamescompletion).findIndex(v => !v) < 0;
+
   const handleCloseSecret = async () => {
     await update({
       _4cStatus: 'OPENED_4C',
@@ -41,6 +48,12 @@ export default function FourOfClubs() {
       _4cHintSuit: selectedSuit,
     });
     setShowConfirmation(false);
+  };
+
+  const handleCompleteGame = async () => {
+    await update({
+      _4cStatus: 'COMPLETED',
+    });
   };
 
   if (!state || isLoading) {
@@ -144,68 +157,56 @@ export default function FourOfClubs() {
         <div className="mt-8 pt-6 border-t-2 border-purple-100">
           <h3 className="font-bold text-purple-600 mb-4 text-center">Support Ability</h3>
 
-          {state._4cStatus !== 'REVEALED_HINT' ? (
+          {allGamesCompleted ? (
+            <div className="flex justify-center">
+              <button
+                onClick={handleCompleteGame}
+                className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition-colors duration-200"
+              >
+                Complete Game
+              </button>
+            </div>
+          ) : state._4cStatus !== 'REVEALED_HINT' ? (
             <>
               <p className="text-gray-700 text-center mb-4">Select a game to receive a significant hint:</p>
 
               <div className="flex justify-center gap-4 mb-6">
-                <label className="flex items-center cursor-pointer">
-                  <input
-                    type="radio"
-                    name="suit"
-                    value="D"
-                    checked={selectedSuit === 'D'}
-                    onChange={(e) => setSelectedSuit(e.target.value as 'D' | 'H' | 'S')}
-                    className="w-5 h-5 text-purple-600 focus:ring-purple-500"
-                  />
-                  <span
-                    className="ml-2 text-2xl font-['Suits']"
-                    style={{ color: SUIT_COLORS.D }}
-                  >
-                    {SUIT_SYMBOLS.D}
-                  </span>
-                </label>
+                {(['D', 'H', 'S'] as const).map((suit) => {
+                  const isCompleted = otherGamescompletion[suit];
 
-                <label className="flex items-center cursor-pointer">
-                  <input
-                    type="radio"
-                    name="suit"
-                    value="H"
-                    checked={selectedSuit === 'H'}
-                    onChange={(e) => setSelectedSuit(e.target.value as 'D' | 'H' | 'S')}
-                    className="w-5 h-5 text-purple-600 focus:ring-purple-500"
-                  />
-                  <span
-                    className="ml-2 text-2xl font-['Suits']"
-                    style={{ color: SUIT_COLORS.H }}
-                  >
-                    {SUIT_SYMBOLS.H}
-                  </span>
-                </label>
-
-                <label className="flex items-center cursor-pointer">
-                  <input
-                    type="radio"
-                    name="suit"
-                    value="S"
-                    checked={selectedSuit === 'S'}
-                    onChange={(e) => setSelectedSuit(e.target.value as 'D' | 'H' | 'S')}
-                    className="w-5 h-5 text-purple-600 focus:ring-purple-500"
-                  />
-                  <span
-                    className="ml-2 text-2xl font-['Suits']"
-                    style={{ color: SUIT_COLORS.S }}
-                  >
-                    {SUIT_SYMBOLS.S}
-                  </span>
-                </label>
+                  return (
+                    <label key={suit} className="flex items-center cursor-pointer">
+                      <input
+                        type="radio"
+                        name="suit"
+                        value={suit}
+                        checked={selectedSuit === suit}
+                        disabled={isCompleted}
+                        onChange={(e) => setSelectedSuit(e.target.value as 'D' | 'H' | 'S')}
+                        className="w-5 h-5 text-purple-600 focus:ring-purple-500"
+                      />
+                      <span
+                        className="ml-2 text-2xl font-['Suits']"
+                        style={{ color: SUIT_COLORS[suit] }}
+                      >
+                        {SUIT_SYMBOLS[suit]}
+                        {isCompleted && <span className="text-green-600 font-bold">✓</span>}
+                      </span>
+                    </label>
+                  );
+                })}
               </div>
 
               {!showConfirmation ? (
                 <div className="flex justify-center">
                   <button
                     onClick={() => setShowConfirmation(true)}
-                    className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition-colors duration-200"
+                    disabled={otherGamescompletion[selectedSuit]}
+                    className={`font-semibold px-6 py-3 rounded-lg shadow-md transition-colors duration-200 ${
+                      otherGamescompletion[selectedSuit]
+                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                        : 'bg-purple-600 hover:bg-purple-700 text-white'
+                    }`}
                   >
                     Reveal Hint
                   </button>
