@@ -1,19 +1,35 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
+import Home from './pages/Home'
 import PlayerAssignment from './pages/PlayerAssignment'
 import ColorPage from './pages/ColorPage'
 import OneHundredHeartsPage from './pages/OneHundredHeartsPage'
 import AdminPage from './pages/AdminPage'
+import NotFoundPage from './pages/NotFoundPage'
+import { Color, ColorPaths } from './types/playerAssignment'
+import { SoSNavigation } from './components/roles/SixOfSpades'
 
 function App() {
   return (
     <BrowserRouter>
       <div className="min-h-screen">
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/ad24r7" element={<PlayerAssignment />} />
-          <Route path="/color/:color" element={<ColorPage />} />
-          <Route path="/100h" element={<OneHundredHeartsPage />} />
           <Route path="/mi2r52" element={<AdminPage />} />
+
+          {Object.entries(ColorPaths).map(([color, path]) => {
+            return <Route path={`/${path}`} element={<ColorPage color={color as Color} />} />
+          })}
+          
+          <Route path="/100h" element={<OneHundredHeartsPage />} />
+
+          <Route path="/LQL1" element={<SoSNavigation code='C2D' />} />
+          <Route path="/XNF2" element={<SoSNavigation code='E3F' />} />
+          <Route path="/Q1B3" element={<SoSNavigation code='G4H' />} />
+          <Route path="/72V4" element={<SoSNavigation code='I5J' />} />
+
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
     </BrowserRouter>

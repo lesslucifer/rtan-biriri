@@ -2,11 +2,12 @@ import { useMemo, useEffect } from 'react';
 import GameHeader from '../GameHeader';
 import PlayerResult from '../PlayerResult';
 import { getRoleCard } from '../../utils/roleCardMapping';
-import { GAME_ROLES } from '../../types/playerAssignment';
+import { ColorPaths, GAME_ROLES } from '../../types/playerAssignment';
 import type { PlayerAssignment } from '../../types/playerAssignment';
 import { useGameState } from '@/hooks/useGameState';
 import { useFirebase } from '../../hooks/useFirebase';
 import { Loader2 } from 'lucide-react';
+import { Navigate } from 'react-router-dom';
 
 interface TreasureInstruction {
   code: string;
@@ -42,6 +43,24 @@ const TREASURE_INSTRUCTIONS: TreasureInstruction[] = [
   }
 ];
 
+export function SoSNavigation({code}: { code: string }) {
+  const { data: playerAssignments } = useFirebase<PlayerAssignment>({
+    collectionName: 'playerAssignments'
+  });
+
+  const _6SAssignment = playerAssignments.find(p => p.role === GAME_ROLES._6S)
+  const color = _6SAssignment?.color
+  const path = ColorPaths[color!]
+
+
+  if (!path) return (
+    <div className="min-h-screen flex items-center justify-center p-2">
+      <Loader2 className="w-16 h-16 text-white animate-spin" />
+    </div>
+  )
+
+  return <Navigate to={`/${path}?c=${code}`} />
+}
 
 export default function SixOfSpades() {
   const card = getRoleCard(GAME_ROLES._6S);

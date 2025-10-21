@@ -1,4 +1,3 @@
-import { useParams, Navigate } from 'react-router-dom';
 import { useMemo } from 'react';
 import { Loader2 } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -31,8 +30,7 @@ const roleThemeConfig: Record<GameRole, {
   }
 };
 
-export default function ColorPage() {
-  const { color } = useParams<{ color: string }>();
+export default function ColorPage({ color }: { color: Color }) {
   const {
     data: firebaseAssignments,
     isLoading: paLoading,
@@ -52,7 +50,7 @@ export default function ColorPage() {
   }, [firebaseAssignments, isValidColor, normalizedColor]);
 
   if (!isValidColor) {
-    return <Navigate to="/ad24r7" replace />;
+    return null;
   }
 
   if (!playerAssignment || paLoading || !gameState || gsLoading) {

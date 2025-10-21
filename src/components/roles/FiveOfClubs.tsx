@@ -9,7 +9,7 @@ import { Loader2 } from 'lucide-react';
 import { useState, useMemo, useEffect } from 'react';
 import { SUIT_SYMBOLS, SUIT_COLORS } from '../../constants/suits';
 
-const HINT_COST_MINUTES = 100;
+const HINT_COST_MINUTES = 5;
 
 const HINTS = {
   D: [

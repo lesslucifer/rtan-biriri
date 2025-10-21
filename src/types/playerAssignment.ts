@@ -50,3 +50,11 @@ export interface PlayerAssignment {
   createdAt?: Timestamp;
   updatedAt?: Timestamp;
 }
+
+export const ColorPaths: Record<Color, string> = {
+  [Color.RED]: 'LLKI',
+  [Color.GREEN]: 'PSKX',
+  [Color.BLUE]: 'DFIO',
+  [Color.PINK]: 'OAVU',
+  [Color.ORANGE]: 'LSGT',
+}

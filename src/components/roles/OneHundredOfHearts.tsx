@@ -21,35 +21,14 @@ export default function OneHundredOfHearts() {
       <div className="bg-white rounded-2xl shadow-lg px-6 py-8 border-2 border-purple-100 w-full max-w-2xl">
         <GameHeader
           gameName="100 Tim"
-          gameColor="purple"
+          gameColor="red"
           difficultyCard={card}
         />
 
-        <div className="space-y-4 text-gray-700">
-          <div>
-            <h3 className="font-bold text-purple-600 mb-2">Role:</h3>
-            <p>You are a mysterious guardian of ancient wisdom, holding secrets that span a hundred lifetimes.</p>
-          </div>
-
-          <div>
-            <h3 className="font-bold text-purple-600 mb-2">Abilities:</h3>
-            <ul className="list-disc list-inside space-y-1 ml-2">
-              <li>Access to profound knowledge from past generations</li>
-              <li>Ability to see patterns others cannot perceive</li>
-              <li>Connection to the hearts of all players</li>
-              <li>Insight into the true nature of challenges</li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-bold text-purple-600 mb-2">Objective:</h3>
-            <p>Use your ancient wisdom to guide others through their trials. Your knowledge is a gift meant to be shared when the time is right.</p>
-          </div>
-
-          <div className="mt-6 bg-purple-50 border-2 border-purple-200 rounded-lg p-4">
-            <p className="text-center text-purple-700 italic">
-              "In the realm of a hundred hearts, patience and wisdom reign supreme."
-            </p>
+        <div className="space-y-4 text-gray-700 mb-3 mt-10">
+          <div className='border-2 border-purple-300 rounded-lg p-4 shadow-md'>
+            <h3 className="font-bold text-purple-600 mb-2 text-xl">Thử Thách</h3>
+            <p>Có một video trên <b className='text-amber-900 text-lg'>Tiktok</b> đạt <b className='text-red-600'>100 lượt tim</b> trở lên</p>
           </div>
         </div>
       </div>
