@@ -10,9 +10,9 @@ import { useState, useMemo } from 'react';
 import { SUIT_SYMBOLS, SUIT_COLORS } from '../../constants/suits';
 
 const HINTS = {
-  D: "The Diamond game involves strategic resource management and careful observation of player actions.",
-  H: "The Heart game requires empathy and understanding of player motivations - trust is key.",
-  S: "The Spade game is about deduction and logical reasoning - analyze patterns carefully."
+  D: "TRAIN",
+  H: "Cung Thiên Bình",
+  S: "Tầng B1"
 };
 
 export default function FourOfClubs() {
@@ -34,7 +34,10 @@ export default function FourOfClubs() {
     H: state?._5hStatus === 'COMPLETED',
     S: state?._6sStatus === 'COMPLETED'
   };
-  const allGamesCompleted = Object.values(otherGamescompletion).findIndex(v => !v) < 0;
+
+  const otherGameSuits = ['D', 'H', 'S'] as const;
+  const completeGameConditionSuits = otherGameSuits.filter(s => s !== state?._4cHintSuit)
+  const canCompleteGame = completeGameConditionSuits.every(s => otherGamescompletion[s])
 
   const handleCloseSecret = async () => {
     await update({
@@ -69,29 +72,64 @@ export default function FourOfClubs() {
       <div className="w-full flex items-center justify-center p-2">
         <div className="bg-white rounded-2xl shadow-lg px-6 py-8 border-2 border-red-100 w-full max-w-2xl">
           <GameHeader
-            gameName="Witch Hunt"
-            gameColor="red"
-            difficultyCard={{ rank: 5, suit: 'H' }}
+            gameName="Phù Thủy"
+            gameColor="purple"
+            difficultyCard={{ rank: 12, suit: 'H' }}
           />
 
           <div className="space-y-4 text-gray-700">
             <div>
-              <h3 className="font-bold text-red-600 mb-2">Role:</h3>
-              <p>You are a benevolent healer who can save lives during the night phase.</p>
+              <p className="leading-relaxed text-center">
+                <span className="font-bold text-purple-600 text-lg">Bạn chính là <b className='text-purple-700'>Phù Thủy</b>.</span>
+              </p>
+              <p className="leading-relaxed text-center mt-2">
+                Bạn trà trộn và thể hiện như một người chơi bình thường.
+              </p>
+              <p className="leading-relaxed text-center">
+                <b className="text-purple-700 text-lg">Phù Thủy</b> sẽ bị săn tìm bởi những người chơi khác.
+              </p>
+              <p className="leading-relaxed text-center">
+                Mục đích của bạn là <b>ẩn thân</b> và <b>phá hoại</b>.
+              </p>
+              <p className="leading-relaxed text-center font-semibold text-red-600">
+                Hãy <b>ngăn cản</b> những người chơi khác hoàn thành trò chơi của họ!
+              </p>
             </div>
 
-            <div>
-              <h3 className="font-bold text-red-600 mb-2">Abilities:</h3>
-              <ul className="list-disc list-inside space-y-1 ml-2">
-                <li>Each night, choose one player to protect</li>
-                <li>Your protection prevents elimination for that night</li>
-                <li>You cannot protect yourself consecutively</li>
-              </ul>
+            <div className="border-t-2 border-red-100 pt-4">
+              <p className="leading-relaxed text-center">
+                Mọi thứ sẽ <b>kết thúc</b> khi bạn bị phát hiện!
+              </p>
+              <p className="leading-relaxed text-center">
+                Thợ săn sẽ thanh tẩy bạn bằng <b>búp bê</b> của họ!
+              </p>
+              <p className="leading-relaxed text-center">
+                Hãy nói cho thợ săn biết <span className="font-bold text-amber-600">Phần Thưởng</span> của họ ở đâu.
+              </p>
+              <p className="leading-relaxed text-center">
+                Đổi lại, thợ săn sẽ cho bạn biết thông tin về <span className="font-bold text-amber-600">Phần Thưởng</span> của bạn!
+              </p>
             </div>
 
-            <div>
-              <h3 className="font-bold text-red-600 mb-2">Objective:</h3>
-              <p>Help the village identify and eliminate threats while keeping players alive.</p>
+            <div className="border-t-2 border-red-100 pt-4">
+              <p className="leading-relaxed text-center">
+                Nếu có ít nhất một người chơi khác, <b>không thể hoàn thành</b> trò chơi của họ trong vòng <b>40 phút</b>, bạn sẽ <b>chiến thắng</b>!
+              </p>
+              <p className="leading-relaxed text-center font-semibold text-purple-500">
+                Bên cạnh phần thưởng gốc, bạn sẽ nhận thêm một <b className='text-purple-700'>PHẦN THƯỞNG ĐẶC BIỆT</b> bên ngoài trò chơi.
+              </p>
+            </div>
+
+            <div className="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-4 mt-4">
+              <p className="leading-relaxed text-center">
+                Bạn sẽ trà trộn bằng cách hóa thân vào một nhân vật khác.
+              </p>
+              <p className="leading-relaxed text-center font-semibold text-red-500">
+                Cố gắng đọc và ghi nhớ mọi thứ trước khi hóa thân, các thông tin trên đây sẽ <b>không bao giờ</b> xuất hiện trở lại!
+              </p>
+              <p className="leading-relaxed text-center mt-2">
+                Nhấn vào nút dưới đây để biến hình.
+              </p>
             </div>
           </div>
 
@@ -100,7 +138,7 @@ export default function FourOfClubs() {
               onClick={handleCloseSecret}
               className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition-colors duration-200"
             >
-              Close
+              Biến Hình
             </button>
           </div>
         </div>
@@ -128,47 +166,64 @@ export default function FourOfClubs() {
     <div className="w-full flex items-center justify-center p-2">
       <div className="bg-white rounded-2xl shadow-lg px-6 py-8 border-2 border-purple-100 w-full max-w-2xl">
         <GameHeader
-          gameName="Laga Noasta"
+          gameName="Sự Hỗ Trợ Của Thần"
           gameColor="purple"
           difficultyCard={fourOfClubsCard}
         />
 
         <div className="space-y-4 text-gray-700">
           <div>
-            <h3 className="font-bold text-purple-600 mb-2">Role:</h3>
-            <p>A cunning infiltrator who operates in the shadows, gathering intelligence.</p>
+            <p className="leading-relaxed text-center">
+              Bạn có thể lấy <b className="text-purple-700">gợi ý quan trọng</b> cho một trò chơi.
+            </p>
           </div>
 
           <div>
-            <h3 className="font-bold text-purple-600 mb-2">Abilities:</h3>
-            <ul className="list-disc list-inside space-y-1 ml-2">
-              <li>Each night, track one player's movements</li>
-              <li>Discover who they visited or targeted</li>
-              <li>Share intel to help identify threats</li>
-            </ul>
+            <p className="leading-relaxed text-center">
+              Bạn chỉ có thể dùng <b>một lần duy nhất</b>.
+            </p>
           </div>
 
           <div>
-            <h3 className="font-bold text-purple-600 mb-2">Objective:</h3>
-            <p>Gather evidence through surveillance and expose the hidden enemies.</p>
+            <p className="leading-relaxed text-center">
+              Gợi ý của bạn là <b className="text-amber-600">cực kì giá trị</b>, chỉ dẫn trực tiếp đến <b className="text-amber-600">đáp án cuối cùng</b> của trò chơi được chọn.
+            </p>
+          </div>
+
+          <div>
+            <p className="leading-relaxed text-center">
+              Bạn sẽ chiến thắng khi <b>hai trò chơi còn lại</b> (không được lấy gợi ý) hoàn thành.
+            </p>
+          </div>
+
+          <div>
+            <p className="leading-relaxed text-center">
+              Bạn có thể dùng (hoặc <b>không dùng</b>) năng lực này, vào bất kì lúc nào.
+            </p>
+          </div>
+
+          <div>
+            <p className="leading-relaxed text-center font-semibold text-purple-600">
+              Hãy lựa chọn khôn ngoan!
+            </p>
           </div>
         </div>
 
         <div className="mt-8 pt-6 border-t-2 border-purple-100">
-          <h3 className="font-bold text-purple-600 mb-4 text-center">Support Ability</h3>
+          <h3 className="font-bold text-purple-600 mb-4 text-center">Khả Năng Hỗ Trợ</h3>
 
-          {allGamesCompleted ? (
+          {canCompleteGame ? (
             <div className="flex justify-center">
               <button
                 onClick={handleCompleteGame}
                 className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition-colors duration-200"
               >
-                Complete Game
+                Hoàn Thành Trò Chơi
               </button>
             </div>
           ) : state._4cStatus !== 'REVEALED_HINT' ? (
             <>
-              <p className="text-gray-700 text-center mb-4">Select a game to receive a significant hint:</p>
+              <p className="text-gray-700 text-center mb-4 leading-relaxed">Chọn một trò chơi để nhận gợi ý quan trọng:</p>
 
               <div className="flex justify-center gap-4 mb-6">
                 {(['D', 'H', 'S'] as const).map((suit) => {
@@ -208,26 +263,26 @@ export default function FourOfClubs() {
                         : 'bg-purple-600 hover:bg-purple-700 text-white'
                     }`}
                   >
-                    Reveal Hint
+                    Hiển Thị Gợi Ý
                   </button>
                 </div>
               ) : (
                 <div className="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-4">
                   <p className="text-center text-gray-700 mb-4 font-semibold">
-                    Are you sure? This action cannot be undone!
+                    Bạn có chắc chắn không? Hành động này không thể hoàn tác!
                   </p>
                   <div className="flex justify-center gap-4">
                     <button
                       onClick={handleRevealHint}
                       className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-2 rounded-lg shadow-md transition-colors duration-200"
                     >
-                      Yes, Reveal
+                      Có, Hiển Thị
                     </button>
                     <button
                       onClick={() => setShowConfirmation(false)}
                       className="bg-gray-400 hover:bg-gray-500 text-white font-semibold px-6 py-2 rounded-lg shadow-md transition-colors duration-200"
                     >
-                      Cancel
+                      Hủy
                     </button>
                   </div>
                 </div>
@@ -236,7 +291,7 @@ export default function FourOfClubs() {
           ) : (
             <>
               <div className="mb-4">
-                <h3 className="font-bold text-purple-600 mb-2 text-center">Selected Game:</h3>
+                <h3 className="font-bold text-purple-600 mb-2 text-center">Trò Chơi Đã Chọn:</h3>
                 <p className="text-center">
                   <span
                     className="text-4xl font-['Suits']"
@@ -248,14 +303,10 @@ export default function FourOfClubs() {
               </div>
 
               <div className="bg-purple-50 border-2 border-purple-200 rounded-lg p-4">
-                <h3 className="font-bold text-purple-600 mb-2">Your Hint:</h3>
-                <p className="text-gray-700">
+                <h3 className="font-bold text-purple-600 mb-2">Gợi Ý Của Bạn:</h3>
+                <p className="text-gray-700 leading-relaxed text-center">
                   {state._4cHintSuit && HINTS[state._4cHintSuit]}
                 </p>
-              </div>
-
-              <div className="mt-4 text-center text-sm text-gray-500">
-                Use this information wisely to support your team!
               </div>
             </>
           )}

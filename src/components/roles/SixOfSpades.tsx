@@ -84,7 +84,7 @@ export default function SixOfSpades() {
       <div className="w-full flex items-center justify-center p-2">
         <div className="bg-white rounded-2xl shadow-lg px-6 py-8 border-2 border-gray-800 w-full max-w-2xl">
           <GameHeader
-            gameName="Truy Tìm Kho Báu"
+            gameName="Tìm Kho Báu"
             gameColor="gray"
             difficultyCard={card}
           />
@@ -99,7 +99,7 @@ export default function SixOfSpades() {
       <div className="w-full flex items-center justify-center p-2">
         <div className="bg-white rounded-2xl shadow-lg px-6 py-8 border-2 border-gray-800 w-full max-w-2xl">
           <GameHeader
-            gameName="Truy Tìm Kho Báu"
+            gameName="Tìm Kho Báu"
             gameColor="gray"
             difficultyCard={card}
           />
@@ -125,7 +125,7 @@ export default function SixOfSpades() {
     <div className="w-full flex items-center justify-center p-2">
       <div className="bg-white rounded-2xl shadow-lg px-6 py-8 border-2 border-gray-800 w-full max-w-2xl">
         <GameHeader
-          gameName="Treasure Hunt"
+          gameName="Tìm Kho Báu"
           gameColor="gray"
           difficultyCard={card}
         />
