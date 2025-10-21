@@ -5,6 +5,11 @@ import { useFirebase } from '../hooks/useFirebase';
 import { useGameState } from '../hooks/useGameState';
 import { Player, Color, PLAYER_NAMES, GAME_ROLES } from '../types/playerAssignment';
 import type { PlayerAssignment, GameRole } from '../types/playerAssignment';
+import redDoll from '../assets/dolls/red.jpg';
+import greenDoll from '../assets/dolls/green.jpg';
+import blueDoll from '../assets/dolls/blue.jpg';
+import pinkDoll from '../assets/dolls/pink.jpg';
+import orangeDoll from '../assets/dolls/orange.jpg';
 
 const colorConfig = [
   {
@@ -14,7 +19,8 @@ const colorConfig = [
     textClass: 'text-red-600',
     borderClass: 'border-red-200',
     shadowClass: 'shadow-red-600/20',
-    hoverClass: 'hover:bg-red-600 hover:shadow-red-600/25'
+    hoverClass: 'hover:bg-red-600 hover:shadow-red-600/25',
+    image: redDoll
   },
   {
     color: Color.GREEN,
@@ -23,7 +29,8 @@ const colorConfig = [
     textClass: 'text-green-600',
     borderClass: 'border-green-200',
     shadowClass: 'shadow-green-600/20',
-    hoverClass: 'hover:bg-green-600 hover:shadow-green-600/25'
+    hoverClass: 'hover:bg-green-600 hover:shadow-green-600/25',
+    image: greenDoll
   },
   {
     color: Color.BLUE,
@@ -32,7 +39,8 @@ const colorConfig = [
     textClass: 'text-blue-600',
     borderClass: 'border-blue-200',
     shadowClass: 'shadow-blue-600/20',
-    hoverClass: 'hover:bg-blue-600 hover:shadow-blue-600/25'
+    hoverClass: 'hover:bg-blue-600 hover:shadow-blue-600/25',
+    image: blueDoll
   },
   {
     color: Color.PINK,
@@ -41,7 +49,8 @@ const colorConfig = [
     textClass: 'text-pink-600',
     borderClass: 'border-pink-200',
     shadowClass: 'shadow-pink-600/20',
-    hoverClass: 'hover:bg-pink-600 hover:shadow-pink-600/25'
+    hoverClass: 'hover:bg-pink-600 hover:shadow-pink-600/25',
+    image: pinkDoll
   },
   {
     color: Color.ORANGE,
@@ -50,7 +59,8 @@ const colorConfig = [
     textClass: 'text-orange-600',
     borderClass: 'border-orange-200',
     shadowClass: 'shadow-orange-600/20',
-    hoverClass: 'hover:bg-orange-600 hover:shadow-orange-600/25'
+    hoverClass: 'hover:bg-orange-600 hover:shadow-orange-600/25',
+    image: orangeDoll
   }
 ];
 
@@ -170,7 +180,7 @@ export default function PlayerAssignment() {
   }
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto px-4 py-6">
       <div className="flex flex-col gap-4">
         {players.map((player) => {
           const assignedColor = assignments[player];
@@ -217,7 +227,7 @@ export default function PlayerAssignment() {
                     )} */}
                   </div>
                 ) : (
-                  <div className="flex flex-wrap items-center justify-center gap-2">
+                  <div className="flex flex-wrap items-center justify-center gap-3">
                     {getAvailableColors().length > 0 ? (
                       getAvailableColors().map((color) => {
                         const config = colorConfig.find(c => c.color === color)!;
@@ -225,9 +235,10 @@ export default function PlayerAssignment() {
                           <button
                             key={color}
                             onClick={() => handleColorSelect(player, color)}
-                            className={`bg-white ${config.textClass} font-semibold text-[0.85rem] px-[18px] py-2 rounded-lg border-2 ${config.borderClass} transition-all duration-200 ease-in-out hover:text-white hover:-translate-y-0.5 shadow-md ${config.hoverClass}`}
+                            className={`bg-white ${config.textClass} font-semibold text-sm px-3 py-2 rounded-lg border-2 ${config.borderClass} transition-all duration-200 ease-in-out hover:text-white hover:-translate-y-0.5 shadow-md ${config.hoverClass} flex flex-col items-center gap-2 min-w-[100px]`}
                           >
-                            {color}
+                            <img src={config.image} alt={color} className="w-16 h-16 object-cover rounded-md" />
+                            <span>{color}</span>
                           </button>
                         );
                       })
