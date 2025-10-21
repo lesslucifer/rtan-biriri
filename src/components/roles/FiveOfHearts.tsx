@@ -33,7 +33,7 @@ export default function FiveOfHearts() {
       <div className="w-full flex items-center justify-center p-2">
         <div className="bg-gradient-to-br from-purple-50 via-white to-red-50 rounded-2xl shadow-lg px-6 py-8 border-2 border-purple-200 w-full max-w-2xl">
           <GameHeader
-            gameName="Witch Hunt"
+            gameName="Săn Phù Thủy"
             gameColor="red"
             difficultyCard={card}
           />
@@ -55,21 +55,24 @@ export default function FiveOfHearts() {
         <div className="space-y-4 text-gray-700">
           <div>
             <p className="leading-relaxed text-justify">
-              Một <span className="font-bold text-purple-700 text-lg">Phù Thủy</span> đang ẩn nấp giữa các người chơi.
-              Không giống ai khác, ả mang trong mình mục tiêu duy nhất: <b>phá hoại</b> mọi thứ.
+              Một <span className="font-bold text-purple-700 text-lg">Phù Thủy</span> đang ẩn nấp giữa các người chơi.<br />
+              Không giống mọi người, mục tiêu của ả chính là: <b>phá hoại</b> mọi thứ.
             </p>
           </div>
 
           <div>
             <p className="leading-relaxed text-justify">
-              Hãy tìm ra <span className="font-bold text-purple-700 text-lg">Phù Thủy</span> và trao đổi búp bê với ả.
-              Dưới năng lực <b>tiên tri</b> bí ẩn, ả sẽ buộc phải tiết lộ vị trí của <span className="font-bold text-amber-600 text-lg">Phần Thưởng</span> dành cho bạn.
+              Hãy tìm ra <span className="font-bold text-purple-700 text-lg">Phù Thủy</span> và <b>trao đổi búp bê</b> để thanh tẩy ả ta.<br />
+              Sau đó, bằng năng lực <b>tiên tri</b> bí ẩn, ả sẽ tìm ra và tiết lộ vị trí <span className="font-bold text-amber-600 text-lg">Phần Thưởng</span> của bạn.
             </p>
           </div>
 
           <div>
-            <p className="leading-relaxed text-justify">Phải tìm ra ả càng sớm càng tốt. Mỗi giây trôi qua là một cơ hội cho ả <b>phá hoại</b>.</p>
-            <p className="leading-relaxed text-justify font-semibold text-red-500">
+            <p className="leading-relaxed text-justify">
+              Phải tìm ra <span className="font-bold text-purple-700 text-lg">Phù Thủy</span> càng sớm càng tốt.<br />
+              Mỗi giây trôi qua là một cơ hội cho ả <b>phá hoại</b>
+            </p>
+            <p className="leading-relaxed text-justify font-semibold text-red-500 text-lg mt-2">
               Hãy nhanh chân trước khi quá muộn!
             </p>
           </div>

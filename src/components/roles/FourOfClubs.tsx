@@ -6,7 +6,7 @@ import type { PlayerAssignment } from '../../types/playerAssignment';
 import { useGameState } from '@/hooks/useGameState';
 import { useFirebase } from '../../hooks/useFirebase';
 import { Loader2 } from 'lucide-react';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import { SUIT_SYMBOLS, SUIT_COLORS } from '../../constants/suits';
 
 const HINTS = {
@@ -53,11 +53,17 @@ export default function FourOfClubs() {
     setShowConfirmation(false);
   };
 
-  const handleCompleteGame = async () => {
+  const handleCompleteGame = useCallback(async () => {
     await update({
       _4cStatus: 'COMPLETED',
     });
-  };
+  }, [update]);
+
+  useEffect(() => {
+    if (canCompleteGame && state._4cStatus !== 'COMPLETED') {
+      handleCompleteGame();
+    }
+  }, [canCompleteGame, state._4cStatus, handleCompleteGame]);
 
   if (!state || isLoading) {
     return (
@@ -151,7 +157,7 @@ export default function FourOfClubs() {
       <div className="w-full flex items-center justify-center p-2">
         <div className="bg-white rounded-2xl shadow-lg px-6 py-8 border-2 border-purple-100 w-full max-w-2xl">
           <GameHeader
-            gameName="Laga Noasta"
+            gameName="Sự Hỗ Trợ Của Thần"
             gameColor="purple"
             difficultyCard={fourOfClubsCard}
           />
@@ -212,16 +218,7 @@ export default function FourOfClubs() {
         <div className="mt-8 pt-6 border-t-2 border-purple-100">
           <h3 className="font-bold text-purple-600 mb-4 text-center">Khả Năng Hỗ Trợ</h3>
 
-          {canCompleteGame ? (
-            <div className="flex justify-center">
-              <button
-                onClick={handleCompleteGame}
-                className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition-colors duration-200"
-              >
-                Hoàn Thành Trò Chơi
-              </button>
-            </div>
-          ) : state._4cStatus !== 'REVEALED_HINT' ? (
+          {state._4cStatus !== 'REVEALED_HINT' ? (
             <>
               <p className="text-gray-700 text-center mb-4 leading-relaxed">Chọn một trò chơi để nhận gợi ý quan trọng:</p>
 

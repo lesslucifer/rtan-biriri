@@ -9,23 +9,23 @@ import { Loader2 } from 'lucide-react';
 import { useState, useMemo, useEffect } from 'react';
 import { SUIT_SYMBOLS, SUIT_COLORS } from '../../constants/suits';
 
-const HINT_COST_MINUTES = 0.5;
+const HINT_COST_MINUTES = 100;
 
 const HINTS = {
   D: [
-    "Diamond Hint 1: Pay attention to the resource distribution patterns.",
-    "Diamond Hint 2: The key player holds more resources than they claim.",
-    "Diamond Hint 3: The final resource exchange will reveal the truth."
+    "Đất nước trong tấm gương",
+    "Cắt đôi nỗi sầu",
+    "Google: Hieroglyphics"
   ],
   H: [
-    "Heart Hint 1: Trust is earned through consistent actions, not words.",
-    "Heart Hint 2: One player's motivations are not what they seem.",
-    "Heart Hint 3: The most empathetic response may hide deception."
+    "Tại sao là 5 cơ mà không phải 10 cơ ?",
+    "Làm thế nào Phù Thủy có thể Tiên Tri ?",
+    "Phù thủy không phải là đồng đội"
   ],
   S: [
-    "Spade Hint 1: Look for patterns in the timing of actions.",
-    "Spade Hint 2: The logical inconsistency lies in the third statement.",
-    "Spade Hint 3: Cross-reference the alibis with known facts."
+    "Mật mã ngoài trời",
+    "Đừng chơi một mình: đông người, bớt việc",
+    "Mật mã dưới lòng đất"
   ]
 };
 
@@ -48,12 +48,7 @@ export default function FiveOfClubs() {
     H: state?._5hStatus === 'COMPLETED',
     S: state?._6sStatus === 'COMPLETED'
   };
-  const allGamesCompleted = Object.values(otherGamescompletion).findIndex(v => !v) < 0;
-
-  const totalHints = useMemo(() => {
-    return HINTS.D.length + HINTS.H.length + HINTS.S.length;
-  }, []);
-
+  const allGamesCompleted = Object.values(otherGamescompletion).every(v => !!v);
   const gameStartTime = state?.createdAt?.toMillis() ?? Date.now();
   const timeBank = now - gameStartTime - (state?._5cUsedTime ?? 0);
 
@@ -125,7 +120,7 @@ export default function FiveOfClubs() {
       <div className="w-full flex items-center justify-center p-2">
         <div className="bg-white rounded-2xl shadow-lg px-6 py-8 border-2 border-green-100 w-full max-w-2xl">
           <GameHeader
-            gameName="Chrono Sleuth"
+            gameName="Đồng Đội"
             gameColor="green"
             difficultyCard={card}
           />
@@ -139,52 +134,46 @@ export default function FiveOfClubs() {
     <div className="w-full flex items-center justify-center p-2">
       <div className="bg-white rounded-2xl shadow-lg px-6 py-8 border-2 border-green-100 w-full max-w-2xl">
         <GameHeader
-          gameName="Chrono Sleuth"
+          gameName="Đồng Đội"
           gameColor="green"
           difficultyCard={card}
         />
 
         <div className="space-y-4 text-gray-700">
           <div>
-            <h3 className="font-bold text-green-600 mb-2">Role:</h3>
-            <p>A time-aware investigator who reveals crucial information at strategic moments.</p>
+            <p className="leading-relaxed text-center">
+              Hãy dùng năng lực của mình hỗ trợ <b>đồng đội</b>
+            </p>
           </div>
 
           <div>
-            <h3 className="font-bold text-green-600 mb-2">Abilities:</h3>
+            <h3 className="font-bold text-green-600 mb-2">Khả Năng:</h3>
             <ul className="list-disc list-inside space-y-1 ml-2">
-              <li>Access to {totalHints} hints across all games</li>
-              <li>Each hint requires {HINT_COST_MINUTES} minutes of time bank</li>
-              <li>Time bank accumulates from when the game starts</li>
-              <li>Choose wisely which game needs insight most</li>
-              <li>Only the latest hint is visible at any time</li>
+              <li>Bạn có thể sử dụng <b>thời gian</b> để lấy <b>gợi ý</b> cho các trò chơi khác</li>
+              <li>Thời gian sẽ tự động được <b>tích lũy</b>, kể từ khi trò chơi bắt đầu</li>
+              <li>Mỗi <b>gợi ý</b> sẽ tiêu tốn <b>{HINT_COST_MINUTES} phút</b> từ thời gian tích lũy</li>
+              <li>Càng về sau, gợi ý càng <b>giá trị</b></li>
+              <li>Hãy ghi chép lại các gợi ý cũ, chỉ <b>gợi ý mới nhất</b> được hiển thị</li>
             </ul>
           </div>
 
           <div>
-            <h3 className="font-bold text-green-600 mb-2">Objective:</h3>
-            <p>Manage your time wisely and provide timely intelligence to support your team's investigation.</p>
+            <h3 className="font-bold text-green-600 mb-2">Bạn chiến thắng khi</h3>
+            <b className="text-amber-600">Cả ba trò chơi khác hoàn thành</b>
           </div>
         </div>
 
-        <div className="space-y-4 text-gray-700">
-          <div>
-            <h3 className="font-bold text-green-600 mb-2">Role:</h3>
-            <p>A time-aware investigator who reveals crucial information at strategic moments.</p>
+        {revealHintError !== 'NO_MORE' && <div className="mt-6">
+          <h3 className="font-bold text-green-600 mb-2">Thời gian tích lũy</h3>
+          <div className="bg-green-50 border-2 border-green-200 rounded-lg p-3">
+            <p className="text-center text-green-700 font-semibold text-xl">
+              {formatTime(timeBank)}
+            </p>
+            <p className="text-center text-sm text-gray-600 mt-1">
+              Mỗi gợi ý sẽ tiêu hao {HINT_COST_MINUTES} phút
+            </p>
           </div>
-
-          {revealHintError !== 'NO_MORE' && <div>
-            <h3 className="font-bold text-green-600 mb-2">Time Bank:</h3>
-            <div className="bg-green-50 border-2 border-green-200 rounded-lg p-3">
-              <p className="text-center text-green-700 font-semibold text-xl">
-                {formatTime(timeBank)}
-              </p>
-              <p className="text-center text-sm text-gray-600 mt-1">
-                {HINT_COST_MINUTES} minutes needed per hint
-              </p>
-            </div>
-          </div>}
-        </div>
+        </div>}
 
         {state._5cCurrentHint && (
           <div className="mt-6 bg-green-50 border-2 border-green-200 rounded-lg p-4">
@@ -196,7 +185,7 @@ export default function FiveOfClubs() {
                 {SUIT_SYMBOLS[state._5cCurrentHint.suit]}
               </span>
             </div>
-            <h3 className="font-bold text-green-600 mb-2 text-center">Latest Hint:</h3>
+            <h3 className="font-bold text-green-600 mb-2 text-center">Gợi Ý Mới Nhất:</h3>
             <p className="text-gray-700 text-center">
               {HINTS[state._5cCurrentHint.suit][state._5cCurrentHint.index]}
             </p>
@@ -204,7 +193,7 @@ export default function FiveOfClubs() {
         )}
 
         <div className="mt-6 pt-6 border-t-2 border-green-100">
-          <h3 className="font-bold text-green-600 mb-4 text-center">Select Game to Investigate</h3>
+          <h3 className="font-bold text-green-600 mb-4 text-center">Chọn Trò Chơi Để Hỗ Trợ</h3>
 
           <div className="flex justify-center gap-6 mb-6">
             {(['D', 'H', 'S'] as const).map((suit) => {
@@ -237,9 +226,6 @@ export default function FiveOfClubs() {
                       {isCompleted && <span className="text-green-600 font-bold">✓</span>}
                     </span>
                   </div>
-                  <span className="text-sm text-gray-600">
-                    {remaining} hint{remaining !== 1 ? 's' : ''} left
-                  </span>
                 </label>
               );
             })}
@@ -251,7 +237,7 @@ export default function FiveOfClubs() {
                 onClick={handleCompleteGame}
                 className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition-colors duration-200"
               >
-                Complete Game
+                Hoàn Thành
               </button>
             ) : (
               <button
@@ -263,9 +249,9 @@ export default function FiveOfClubs() {
                     : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                 }`}
               >
-                {revealHintError === 'NO_MORE' ? 'No more hints'
-                  : revealHintError === 'TIME' ? `Wait for ${formatTime(HINT_COST_MINUTES * 60 * 1000 - timeBank)}`
-                  : 'Reveal'}
+                {revealHintError === 'NO_MORE' ? 'Hết gợi ý'
+                  : revealHintError === 'TIME' ? `Chờ ${formatTime(HINT_COST_MINUTES * 60 * 1000 - timeBank)}`
+                  : 'Tiết Lộ'}
               </button>
             )}
           </div>

@@ -20,7 +20,7 @@ export default function OneHundredOfHearts() {
     <div className="w-full flex items-center justify-center p-2">
       <div className="bg-white rounded-2xl shadow-lg px-6 py-8 border-2 border-purple-100 w-full max-w-2xl">
         <GameHeader
-          gameName="100 Hearts"
+          gameName="100 Tim"
           gameColor="purple"
           difficultyCard={card}
         />
