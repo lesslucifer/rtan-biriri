@@ -7,7 +7,7 @@ export type STATUS_5H = 'NEW' | 'COMPLETED'
 export type STATUS_9D = 'NEW' | 'COMPLETED'
 export type STATUS_5C = 'NEW' | 'COMPLETED'
 export type STATUS_6S = 'NEW' | 'COMPLETED'
-export type STATUS_100H = 'NEW'
+export type STATUS_100H = 'NEW' | 'COMPLETED'
 
 export interface GameState {
     id?: string;

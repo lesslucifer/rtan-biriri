@@ -7,32 +7,31 @@ import type { PlayerAssignment } from '../../types/playerAssignment';
 import { useGameState } from '@/hooks/useGameState';
 import { useFirebase } from '../../hooks/useFirebase';
 import { Loader2 } from 'lucide-react';
-import img1 from '../../assets/img1.jpg';
+import Q1 from '../../assets/9D/Q1.png';
+import Q2 from '../../assets/9D/Q2.png';
+import Q3 from '../../assets/9D/Q3.png';
 
 interface PuzzleLevel {
   image: string;
-  instruction?: string;
+  instruction: string;
   answer: string;
-  title: string;
 }
 
 const LEVELS: PuzzleLevel[] = [
   {
-    image: img1,
-    instruction: 'What do you see in this image? Enter the main subject.',
-    answer: 'TOWER',
-    title: 'The Foundation'
+    image: Q1,
+    instruction: 'Capital',
+    answer: 'KABUL'
   },
   {
-    image: img1,
-    instruction: 'Look carefully at the details. What word comes to mind?',
-    answer: 'MYSTERY',
-    title: 'The Enigma'
+    image: Q2,
+    instruction: 'Genya Shinazugawa',
+    answer: 'PENTIUM'
   },
   {
-    image: img1,
-    answer: 'ANCIENT',
-    title: 'The Summit'
+    image: Q3,
+    instruction: 'Alphabet',
+    answer: 'TRAIN'
   }
 ];
 
@@ -134,34 +133,35 @@ export default function NineOfDiamonds() {
           <div className="absolute inset-0 bg-yellow-500/90 rounded-2xl flex items-center justify-center z-10 backdrop-blur-sm">
             <div className="text-center space-y-4 animate-bounce">
               <div className="text-6xl">🎉</div>
-              <h2 className="text-3xl font-bold text-white">Correct!</h2>
-              <p className="text-xl text-white">Moving to next level...</p>
+              <h2 className="text-3xl font-bold text-white">Chính xác!</h2>
+              <p className="text-xl text-white">Chuyển sang câu hỏi tiếp theo...</p>
             </div>
           </div>
         )}
 
         <div className="space-y-6 text-gray-700">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold text-yellow-600">
-              Level {currentLevel + 1}: {currentPuzzle.title}
-            </h2>
+          <div className="text-center space-y-2">
+            <p className="text-lg text-gray-600">
+              Trả lời các câu hỏi, vượt qua mọi trở ngại
+            </p>
+            <p className="text-sm font-semibold text-yellow-600">
+              Phần thưởng lớn dành cho trí tuệ vĩ đại
+            </p>
           </div>
 
           <div className="flex justify-center">
             <img
               src={currentPuzzle.image}
-              alt="Puzzle"
+              alt="Câu hỏi"
               className="rounded-lg shadow-md max-w-full h-auto max-h-64 object-contain"
             />
           </div>
 
-          {currentPuzzle.instruction && (
-            <div className="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-4">
-              <p className="text-center text-gray-700">
-                {currentPuzzle.instruction}
-              </p>
-            </div>
-          )}
+          <div className="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-4">
+            <p className="text-center text-gray-700 font-semibold">
+              {currentPuzzle.instruction}
+            </p>
+          </div>
 
           <div className="space-y-3">
             <input
@@ -169,7 +169,7 @@ export default function NineOfDiamonds() {
               value={answerInput}
               onChange={(e) => setAnswerInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Enter your answer..."
+              placeholder="Nhập câu trả lời..."
               className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none text-center text-lg font-semibold uppercase transition-all duration-300 ${
                 wrongAnswer
                   ? 'border-red-500 bg-red-50 animate-shake'
@@ -189,7 +189,7 @@ export default function NineOfDiamonds() {
                     : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                 }`}
               >
-                Submit Answer
+                Gửi câu trả lời
               </button>
             </div>
           </div>

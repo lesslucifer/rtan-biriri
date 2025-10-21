@@ -4,51 +4,30 @@ import { Loader2 } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useFirebase } from '../hooks/useFirebase';
 import { Color } from '../types/playerAssignment';
-import type { PlayerAssignment } from '../types/playerAssignment';
+import type { PlayerAssignment, GameRole } from '../types/playerAssignment';
 import { getRoleComponent } from '../components/roles';
 import { useGameState } from '@/hooks/useGameState';
 
-const colorConfig: Record<Color, {
-  bgClass: string;
-  bgColor: string;
-  textClass: string;
-  shadowClass: string;
+const roleThemeConfig: Record<GameRole, {
   gradientClass: string;
 }> = {
-  [Color.RED]: {
-    bgClass: 'bg-red-50',
-    bgColor: 'bg-red-600',
-    textClass: 'text-red-600',
-    shadowClass: 'shadow-red-600/30',
+  '5H': {
     gradientClass: 'from-red-600 to-red-300'
   },
-  [Color.GREEN]: {
-    bgClass: 'bg-green-50',
-    bgColor: 'bg-green-600',
-    textClass: 'text-green-600',
-    shadowClass: 'shadow-green-600/30',
+  '9D': {
+    gradientClass: 'from-yellow-600 to-yellow-300'
+  },
+  '5C': {
     gradientClass: 'from-green-600 to-green-300'
   },
-  [Color.BLUE]: {
-    bgClass: 'bg-blue-50',
-    bgColor: 'bg-blue-600',
-    textClass: 'text-blue-600',
-    shadowClass: 'shadow-blue-600/30',
-    gradientClass: 'from-blue-600 to-blue-300'
+  '4C': {
+    gradientClass: 'from-purple-600 to-purple-300'
   },
-  [Color.PINK]: {
-    bgClass: 'bg-pink-50',
-    bgColor: 'bg-pink-600',
-    textClass: 'text-pink-600',
-    shadowClass: 'shadow-pink-600/30',
-    gradientClass: 'from-pink-600 to-pink-300'
+  '6S': {
+    gradientClass: 'from-slate-800 to-slate-500'
   },
-  [Color.ORANGE]: {
-    bgClass: 'bg-orange-50',
-    bgColor: 'bg-orange-600',
-    textClass: 'text-orange-600',
-    shadowClass: 'shadow-orange-600/30',
-    gradientClass: 'from-orange-600 to-orange-300'
+  '100H': {
+    gradientClass: 'from-purple-600 to-purple-300'
   }
 };
 
@@ -76,8 +55,6 @@ export default function ColorPage() {
     return <Navigate to="/ad24r7" replace />;
   }
 
-  const config = colorConfig[normalizedColor as Color];
-
   if (!playerAssignment || paLoading || !gameState || gsLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-600 to-purple-300">
@@ -98,8 +75,10 @@ export default function ColorPage() {
     );
   }
 
+  const roleTheme = roleThemeConfig[playerAssignment.role];
+
   return (
-    <div className={`min-h-screen flex justify-center bg-gradient-to-br ${config.gradientClass} px-4 py-4`}>
+    <div className={`min-h-screen flex justify-center bg-gradient-to-br ${roleTheme.gradientClass} px-4 py-4`}>
       <div className="w-full h-full mt-8">
         {(() => {
           const RoleComponent = getRoleComponent(playerAssignment.role);

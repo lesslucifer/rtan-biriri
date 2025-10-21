@@ -18,22 +18,22 @@ const TREASURE_INSTRUCTIONS: TreasureInstruction[] = [
   {
     code: 'A1B',
     showDesc: true,
-    instruction: 'Look beneath the oldest tree in the garden, where shadows dance at noon.'
+    instruction: 'Phía sau màn hình'
   },
   {
     code: 'C2D',
-    showDesc: false,
-    instruction: 'Follow the path where the river bends. Count seven stones from the willow, and dig where the eighth should be.'
+    showDesc: true,
+    instruction: 'Phía sau cánh cửa'
   },
   {
     code: 'E3F',
-    showDesc: false,
-    instruction: 'The treasure lies not in gold, but in wisdom. Seek the ancient library where knowledge is kept.'
+    showDesc: true,
+    instruction: 'Bên dưới ghế'
   },
   {
     code: 'G4H',
-    showDesc: false,
-    instruction: 'Behind the painting of the setting sun, you will find the key to unlock the final door.'
+    showDesc: true,
+    instruction: 'Một tầng nào đó trong cầu thang thoát hiểm'
   },
   {
     code: 'I5J',
@@ -42,15 +42,6 @@ const TREASURE_INSTRUCTIONS: TreasureInstruction[] = [
   }
 ];
 
-const GAME_DESCRIPTION = 'A deadly operative who eliminates targets under the cover of darkness.';
-
-const GAME_ABILITIES = [
-  'Each night, choose one player to eliminate',
-  'Strike silently and leave no trace',
-  'Work to reduce opposition numbers'
-];
-
-const GAME_OBJECTIVE = 'Eliminate all opposing players to secure victory.';
 
 export default function SixOfSpades() {
   const card = getRoleCard(GAME_ROLES._6S);
@@ -93,7 +84,7 @@ export default function SixOfSpades() {
       <div className="w-full flex items-center justify-center p-2">
         <div className="bg-white rounded-2xl shadow-lg px-6 py-8 border-2 border-gray-800 w-full max-w-2xl">
           <GameHeader
-            gameName="Treasure Hunt"
+            gameName="Truy Tìm Kho Báu"
             gameColor="gray"
             difficultyCard={card}
           />
@@ -108,16 +99,16 @@ export default function SixOfSpades() {
       <div className="w-full flex items-center justify-center p-2">
         <div className="bg-white rounded-2xl shadow-lg px-6 py-8 border-2 border-gray-800 w-full max-w-2xl">
           <GameHeader
-            gameName="Treasure Hunt"
+            gameName="Truy Tìm Kho Báu"
             gameColor="gray"
             difficultyCard={card}
           />
 
           <div className="space-y-4 text-gray-700">
             <div className="bg-red-50 border-2 border-red-300 rounded-lg p-6 text-center">
-              <h3 className="font-bold text-red-600 mb-2 text-xl">Invalid Code</h3>
+              <h3 className="font-bold text-red-600 mb-2 text-xl">Mã không hợp lệ</h3>
               <p className="text-gray-700">
-                The code you entered is not recognized. Please check your treasure map and try again.
+                Mã bạn nhập không được nhận diện. Vui lòng kiểm tra lại bản đồ kho báu và thử lại.
               </p>
             </div>
           </div>
@@ -139,35 +130,23 @@ export default function SixOfSpades() {
           difficultyCard={card}
         />
 
-        <div className="space-y-4 text-gray-700">
+        <div className="space-y-4">
           {currentInstruction.showDesc && (
             <>
-              <div>
-                <h3 className="font-bold text-gray-800 mb-2">Role:</h3>
-                <p>{GAME_DESCRIPTION}</p>
+              <div className="text-center space-y-2">
+                <p className="text-md text-blue-600 font-medium">
+                  Đi theo từng chỉ dẫn để tìm đến <b className="text-lg">Kho Báu</b> của bạn
+                </p>
+                <p className="text-sm font-semibold text-gray-600">
+                  Hãy sẵn sàng đổ mồ hôi
+                </p>
               </div>
-
-              <div>
-                <h3 className="font-bold text-gray-800 mb-2">Abilities:</h3>
-                <ul className="list-disc list-inside space-y-1 ml-2">
-                  {GAME_ABILITIES.map((ability, index) => (
-                    <li key={index}>{ability}</li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="font-bold text-gray-800 mb-2">Objective:</h3>
-                <p className="text-red-600 font-semibold">{GAME_OBJECTIVE}</p>
-              </div>
-
-              <div className="border-t-2 border-gray-200 my-4"></div>
             </>
           )}
 
-          <div className="bg-gray-50 border-2 border-gray-200 rounded-lg p-6">
-            <h3 className="font-bold text-gray-800 mb-3 text-lg">Your Clue:</h3>
-            <p className="text-gray-700 text-base leading-relaxed">
+          <div className="bg-indigo-50 border-2 border-indigo-300 rounded-lg p-4">
+            <p className="text-center text-indigo-700 font-semibold">
+              <p className="text-lg font-bold text-gray-700">Chỉ dẫn</p>
               {currentInstruction.instruction}
             </p>
           </div>

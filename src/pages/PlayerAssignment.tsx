@@ -16,7 +16,8 @@ const colorConfig = [
     color: Color.RED,
     bgClass: 'bg-red-50',
     bgColor: 'bg-red-600',
-    textClass: 'text-red-600',
+    headerColor: 'bg-red-400',
+    textClass: 'text-red-400',
     borderClass: 'border-red-200',
     shadowClass: 'shadow-red-600/20',
     hoverClass: 'hover:bg-red-600 hover:shadow-red-600/25',
@@ -26,6 +27,7 @@ const colorConfig = [
     color: Color.GREEN,
     bgClass: 'bg-green-50',
     bgColor: 'bg-green-600',
+    headerColor: 'bg-green-500',
     textClass: 'text-green-600',
     borderClass: 'border-green-200',
     shadowClass: 'shadow-green-600/20',
@@ -36,6 +38,7 @@ const colorConfig = [
     color: Color.BLUE,
     bgClass: 'bg-blue-50',
     bgColor: 'bg-blue-600',
+    headerColor: 'bg-blue-500',
     textClass: 'text-blue-600',
     borderClass: 'border-blue-200',
     shadowClass: 'shadow-blue-600/20',
@@ -46,6 +49,7 @@ const colorConfig = [
     color: Color.PINK,
     bgClass: 'bg-pink-50',
     bgColor: 'bg-pink-600',
+    headerColor: 'bg-pink-400',
     textClass: 'text-pink-600',
     borderClass: 'border-pink-200',
     shadowClass: 'shadow-pink-600/20',
@@ -56,6 +60,7 @@ const colorConfig = [
     color: Color.ORANGE,
     bgClass: 'bg-orange-50',
     bgColor: 'bg-orange-600',
+    headerColor: 'bg-orange-400',
     textClass: 'text-orange-600',
     borderClass: 'border-orange-200',
     shadowClass: 'shadow-orange-600/20',
@@ -191,40 +196,29 @@ export default function PlayerAssignment() {
               key={player}
               className="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-200 ease-in-out"
             >
-              <div className="bg-gradient-to-br from-purple-600 to-purple-300 px-[18px] py-[10px] flex justify-between items-center">
+              <div className={`${colorInfo ? `${colorInfo.headerColor} bg-gradient-to-br from-current to-current/50` : 'bg-gradient-to-br from-purple-600 to-purple-300'} px-[18px] py-[10px] flex justify-between items-center`}>
                 <div className="flex items-center gap-2">
                   <UserCircle size={18} strokeWidth={2.5} className="text-white" />
                   <span className="text-white font-bold text-[0.8rem] uppercase tracking-[1.2px]">
                     {PLAYER_NAMES[player]}
                   </span>
                 </div>
-                {assignedColor && (
-                  <button
-                    onClick={() => handleColorRemove(player)}
-                    aria-label="Remove assignment"
-                    className="text-white bg-white/20 rounded-full p-1 hover:bg-white/30 transition-colors"
-                  >
-                    <X size={16} strokeWidth={2.5} />
-                  </button>
-                )}
               </div>
 
               <div className={`${colorInfo?.bgClass || 'bg-gray-50'} min-h-[80px] p-4 flex items-center justify-center`}>
                 {assignedColor ? (
-                  <div className="flex flex-col items-center gap-2">
-                    <div className={`${colorInfo?.bgColor} text-white px-7 py-3.5 rounded-xl inline-flex items-center gap-2.5 shadow-lg ${colorInfo?.shadowClass} border-2 border-white`}>
-                      <div className="w-5 h-5 rounded-full bg-white/30 border-2 border-white" />
-                      <span className="font-bold text-lg tracking-wide">
-                        {assignedColor}
-                      </span>
+                  <div className="relative">
+                    <div className={`bg-white ${colorInfo?.textClass} font-semibold text-sm px-3 py-2 rounded-lg border-2 ${colorInfo?.borderClass} shadow-md flex flex-col items-center gap-2 min-w-[100px]`}>
+                      <img src={colorInfo?.image} alt={assignedColor} className="w-16 h-16 object-cover rounded-md" />
+                      <span>{assignedColor}</span>
                     </div>
-                    {/* {assignedRole && (
-                      <div className="bg-white/80 backdrop-blur-sm px-4 py-1.5 rounded-lg border-2 border-purple-200 shadow-sm">
-                        <span className="font-semibold text-purple-700 text-sm">
-                          Role: {assignedRole}
-                        </span>
-                      </div>
-                    )} */}
+                    <button
+                      onClick={() => handleColorRemove(player)}
+                      aria-label="Remove assignment"
+                      className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1.5 hover:bg-red-600 transition-colors shadow-md"
+                    >
+                      <X size={16} strokeWidth={2.5} />
+                    </button>
                   </div>
                 ) : (
                   <div className="flex flex-wrap items-center justify-center gap-3">
