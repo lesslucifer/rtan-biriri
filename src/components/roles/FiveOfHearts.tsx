@@ -54,26 +54,28 @@ export default function FiveOfHearts() {
 
         <div className="space-y-4 text-gray-700">
           <div>
-            <p className="leading-relaxed text-justify">
-              Một <span className="font-bold text-purple-700 text-lg">Phù Thủy</span> đang ẩn nấp giữa các người chơi.<br />
-              Không giống mọi người, mục tiêu của ả chính là: <b>phá hoại</b> mọi thứ.
+            <p className="leading-relaxed text-center">
+              Có một <span className="font-bold text-purple-700 text-lg">Phù Thủy</span> đang ẩn thân trong các người chơi.<br />
+              Mục tiêu của ả chỉ có một: <b>Phá Hoại</b> mọi thứ.
             </p>
           </div>
 
           <div>
-            <p className="leading-relaxed text-justify">
-              Hãy tìm ra <span className="font-bold text-purple-700 text-lg">Phù Thủy</span> và <b>trao đổi búp bê</b> để thanh tẩy ả ta.<br />
-              Sau đó, bằng năng lực <b>tiên tri</b> bí ẩn, ả sẽ tìm ra và tiết lộ vị trí <span className="font-bold text-amber-600 text-lg">Phần Thưởng</span> của bạn.
+            <p className="leading-relaxed text-center">
+              Hãy săn tìm <span className="font-bold text-purple-700 text-lg">Phù Thủy</span><br />
+              Thanh tẩy ả bằng cách <b>trao đổi búp bê</b><br/>
+              (đây là điều kiện <b>hoàn thành trò chơi</b>)<br />
+              Bằng năng lực <b>tiên tri</b> bí ẩn, ả sẽ tìm ra vị trí <span className="font-bold text-amber-600 text-lg">Phần Thưởng</span> của bạn.
             </p>
           </div>
 
           <div>
-            <p className="leading-relaxed text-justify">
+            <p className="leading-relaxed text-center">
               Phải tìm ra <span className="font-bold text-purple-700 text-lg">Phù Thủy</span> càng sớm càng tốt.<br />
-              Mỗi giây trôi qua là một cơ hội cho ả <b>phá hoại</b>
+              Mỗi giây trôi qua là một cơ hội cho sự <b>phá hoại</b>
             </p>
-            <p className="leading-relaxed text-justify font-semibold text-red-500 text-lg mt-2">
-              Hãy nhanh chân trước khi quá muộn!
+            <p className="leading-relaxed text-center font-semibold text-red-500 text-lg mt-2">
+              Nhanh chân lên, trước khi quá muộn!
             </p>
           </div>
 

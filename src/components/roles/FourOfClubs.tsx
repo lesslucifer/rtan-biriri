@@ -78,7 +78,7 @@ export default function FourOfClubs() {
       <div className="w-full flex items-center justify-center p-2">
         <div className="bg-white rounded-2xl shadow-lg px-6 py-8 border-2 border-red-100 w-full max-w-2xl">
           <GameHeader
-            gameName="Phù Thủy"
+            gameName="Phá Hoại"
             gameColor="purple"
             difficultyCard={{ rank: 12, suit: 'H' }}
           />
@@ -88,47 +88,45 @@ export default function FourOfClubs() {
               <p className="leading-relaxed text-center">
                 <span className="font-bold text-purple-600 text-lg">Bạn chính là <b className='text-purple-700'>Phù Thủy</b>.</span>
               </p>
-              <p className="leading-relaxed text-center mt-2">
-                Bạn trà trộn và thể hiện như một người chơi bình thường.
-              </p>
               <p className="leading-relaxed text-center">
                 <b className="text-purple-700 text-lg">Phù Thủy</b> sẽ bị săn tìm bởi những người chơi khác.
               </p>
-              <p className="leading-relaxed text-center">
-                Mục đích của bạn là <b>ẩn thân</b> và <b>phá hoại</b>.
-              </p>
               <p className="leading-relaxed text-center font-semibold text-red-600">
-                Hãy <b>ngăn cản</b> những người chơi khác hoàn thành trò chơi của họ!
+                Mục đích của bạn là <b>ngăn cản</b> người chơi khác hoàn thành trò chơi của họ!
               </p>
             </div>
 
             <div className="border-t-2 border-red-100 pt-4">
+              <h3 className="font-bold text-purple-600 mb-2 text-xl">Chiến Thắng</h3>
               <p className="leading-relaxed text-center">
-                Mọi thứ sẽ <b>kết thúc</b> khi bạn bị phát hiện!
+                Bạn sẽ <b>chiến thắng</b>, nếu có ít nhất một người chơi khác, <b>không thể hoàn thành</b> trò chơi của họ trong vòng <b>40 phút</b>!
+              </p>
+              <p className="leading-relaxed text-center font-semibold text-purple-500">
+                Nhận thêm một <b className='text-purple-700'>PHẦN THƯỞNG ĐẶC BIỆT</b> bên ngoài trò chơi.
+              </p>
+            </div>
+
+            <div className="border-t-2 border-red-100 pt-4">
+              <h3 className="font-bold text-purple-800 mb-2 text-xl">Thất Bại</h3>
+              <p className="leading-relaxed text-center">
+                Mọi thứ sẽ <b>kết thúc</b> khi bạn bị <b>Thợ Săn</b> phát hiện!
               </p>
               <p className="leading-relaxed text-center">
-                Thợ săn sẽ thanh tẩy bạn bằng <b>búp bê</b> của họ!
+                Trao đổi <b>búp bê</b> với <b>Thợ Săn</b> để hoàn thành trò chơi!
               </p>
               <p className="leading-relaxed text-center">
-                Hãy nói cho thợ săn biết <span className="font-bold text-amber-600">Phần Thưởng</span> của họ ở đâu.
+                Dùng năng lực tiên tri để tiết lộ vị trí <span className="font-bold text-amber-600">Phần Thưởng</span> của Thợ Săn.
               </p>
               <p className="leading-relaxed text-center">
                 Đổi lại, thợ săn sẽ cho bạn biết thông tin về <span className="font-bold text-amber-600">Phần Thưởng</span> của bạn!
               </p>
             </div>
 
-            <div className="border-t-2 border-red-100 pt-4">
-              <p className="leading-relaxed text-center">
-                Nếu có ít nhất một người chơi khác, <b>không thể hoàn thành</b> trò chơi của họ trong vòng <b>40 phút</b>, bạn sẽ <b>chiến thắng</b>!
-              </p>
-              <p className="leading-relaxed text-center font-semibold text-purple-500">
-                Bên cạnh phần thưởng gốc, bạn sẽ nhận thêm một <b className='text-purple-700'>PHẦN THƯỞNG ĐẶC BIỆT</b> bên ngoài trò chơi.
-              </p>
-            </div>
-
+            <div className="border-t-2 border-amber-100 pt-4" />
             <div className="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-4 mt-4">
+              <h3 className="font-bold text-amber-600 mb-2 text-xl">Ẩn Thân</h3>
               <p className="leading-relaxed text-center">
-                Bạn sẽ trà trộn bằng cách hóa thân vào một nhân vật khác.
+                Bạn sẽ trà trộn vào trò chơi bằng cách hóa thân vào một nhân vật khác.
               </p>
               <p className="leading-relaxed text-center font-semibold text-red-500">
                 Cố gắng đọc và ghi nhớ mọi thứ trước khi hóa thân, các thông tin trên đây sẽ <b>không bao giờ</b> xuất hiện trở lại!

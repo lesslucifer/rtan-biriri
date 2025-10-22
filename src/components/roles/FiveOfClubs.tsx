@@ -20,10 +20,10 @@ const HINTS = {
   H: [
     "Tại sao là 5 cơ mà không phải 10 cơ ?",
     "Làm thế nào Phù Thủy có thể Tiên Tri ?",
-    "Phù thủy không phải là đồng đội"
+    "Phù thủy không được xem là đồng đội"
   ],
   S: [
-    "Mật mã ngoài trời",
+    "Cánh cửa ngoài trời",
     "Đừng chơi một mình: đông người, bớt việc",
     "Mật mã dưới lòng đất"
   ]
@@ -147,7 +147,7 @@ export default function FiveOfClubs() {
           </div>
 
           <div>
-            <h3 className="font-bold text-green-600 mb-2">Khả Năng:</h3>
+            <h3 className="font-bold text-green-600 mb-2">Khả Năng</h3>
             <ul className="list-disc list-inside space-y-1 ml-2">
               <li>Bạn có thể sử dụng <b>thời gian</b> để lấy <b>gợi ý</b> cho các trò chơi khác</li>
               <li>Thời gian sẽ tự động được <b>tích lũy</b>, kể từ khi trò chơi bắt đầu</li>
