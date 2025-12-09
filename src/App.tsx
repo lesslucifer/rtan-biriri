@@ -9,6 +9,7 @@ import NotFoundPage from './pages/NotFoundPage'
 import BlindSantaPage from './pages/BlindSantaPage'
 import BlindSantaPageRedirect from './pages/BlindSantaPageRedirect'
 import AdminSantaPage from './pages/AdminSantaPage'
+import QRGenPage from './pages/QRGenPage'
 import { Color, ColorPaths } from './types/playerAssignment'
 import { SoSNavigation } from './components/roles/SixOfSpades'
 
@@ -35,6 +36,8 @@ function App() {
           <Route path="/blind-santa" element={<BlindSantaPage />} />
           <Route path="/blind-sant*" element={<BlindSantaPageRedirect />} />
           <Route path="/8892adminst" element={<AdminSantaPage />} />
+
+          <Route path="/qrGen" element={<QRGenPage />} />
 
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
