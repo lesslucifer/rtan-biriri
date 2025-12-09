@@ -19,6 +19,7 @@ export interface UseFirebaseRealtimeReturn<T extends DocumentData> {
   isError: boolean;
   error: Error | null;
   create: (data: Omit<T, 'id'>) => Promise<string>;
+  createWithId: (id: string, data: Omit<T, 'id'>) => Promise<string>;
   update: (id: string, data: Partial<T>) => Promise<void>;
   upsert: (data: Partial<T>, defaultValue: T) => Promise<string>
   delete: (id: string) => Promise<void>;
@@ -50,7 +51,6 @@ export function useFirebase<T extends DocumentData = DocumentData>({
           id: doc.id,
           ...doc.data()
         } as unknown as T));
-        console.log("NEW_SNAPSHOT", data)
         queryClient.setQueryData(queryKey, data);
       },
       (error) => {
@@ -97,6 +97,29 @@ export function useFirebase<T extends DocumentData = DocumentData>({
     }
   });
 
+  const createWithIdMutation = useMutation<string, Error, { id: string; data: Omit<T, 'id'> }>({
+    mutationFn: async ({ id, data }) => {
+      return await service.createWithId(id, data);
+    },
+    onMutate: async ({ id, data }) => {
+      await queryClient.cancelQueries({ queryKey });
+      const previousData = queryClient.getQueryData<T[]>(queryKey);
+
+      queryClient.setQueryData<T[]>(queryKey, (old) => [
+        ...(old || []),
+        { ...data, id } as unknown as T,
+      ]);
+
+      return { previousData };
+    },
+    //@ts-expect-error: The context shouldn't be unknown
+    onError: (_err, _variables, context: { previousData?: T[] }) => {
+      if (context?.previousData) {
+        queryClient.setQueryData(queryKey, context.previousData);
+      }
+    }
+  });
+
   const updateMutation = useMutation<void, Error, { id: string; data: Partial<T> }>({
     mutationFn: async ({ id, data }) => {
       await service.update(id, data);
@@ -133,8 +156,10 @@ export function useFirebase<T extends DocumentData = DocumentData>({
 
   const updateMutateAsync = updateMutation.mutateAsync
   const createMutateAsync = createMutation.mutateAsync
+  const createWithIdMutateAsync = createWithIdMutation.mutateAsync
 
   const update = useCallback((id: string, data: Partial<T>) => updateMutateAsync({ id, data }), [updateMutateAsync])
+  const createWithId = useCallback((id: string, data: Omit<T, 'id'>) => createWithIdMutateAsync({ id, data }), [createWithIdMutateAsync])
   const upsert = useCallback(async (data: Partial<T>, defaultValue: T) => {
     if (data.id) {
       await updateMutateAsync({ id: data.id, data })
@@ -155,6 +180,7 @@ export function useFirebase<T extends DocumentData = DocumentData>({
     isError,
     error,
     create: createMutation.mutateAsync,
+    createWithId,
     update,
     upsert,
     delete: deleteMutation.mutateAsync,

@@ -7,6 +7,7 @@ import {
   addDoc,
   updateDoc,
   deleteDoc,
+  setDoc,
   query,
   where,
   Timestamp,
@@ -38,6 +39,21 @@ export class FirebaseService {
       return docRef.id;
     } catch (error) {
       console.error('Error creating document:', error);
+      throw error;
+    }
+  }
+
+  async createWithId(id: string, data: Omit<DocumentData, 'id'>): Promise<string> {
+    try {
+      const docRef = doc(db, this.collectionName, id);
+      await setDoc(docRef, {
+        ...data,
+        createdAt: Timestamp.now(),
+        updatedAt: Timestamp.now()
+      });
+      return id;
+    } catch (error) {
+      console.error('Error creating document with ID:', error);
       throw error;
     }
   }

@@ -6,6 +6,9 @@ import ColorPage from './pages/ColorPage'
 import OneHundredHeartsPage from './pages/OneHundredHeartsPage'
 import AdminPage from './pages/AdminPage'
 import NotFoundPage from './pages/NotFoundPage'
+import BlindSantaPage from './pages/BlindSantaPage'
+import BlindSantaPageRedirect from './pages/BlindSantaPageRedirect'
+import AdminSantaPage from './pages/AdminSantaPage'
 import { Color, ColorPaths } from './types/playerAssignment'
 import { SoSNavigation } from './components/roles/SixOfSpades'
 
@@ -28,6 +31,10 @@ function App() {
           <Route path="/XNF2" element={<SoSNavigation code='E3F' />} />
           <Route path="/Q1B3" element={<SoSNavigation code='G4H' />} />
           <Route path="/72V4" element={<SoSNavigation code='I5J' />} />
+
+          <Route path="/blind-santa" element={<BlindSantaPage />} />
+          <Route path="/blind-sant*" element={<BlindSantaPageRedirect />} />
+          <Route path="/8892adminst" element={<AdminSantaPage />} />
 
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
